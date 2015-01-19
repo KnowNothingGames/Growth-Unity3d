@@ -12,6 +12,7 @@ TagManager:
   - BombPickup
   - ExplosionFX
   - HealthBar
+  - weapon
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -69,8 +70,4 @@ TagManager:
   - name: UI
     userID: 5
     uniqueID: 149272721
-    locked: 0
-  - name: ground
-    userID: 6
-    uniqueID: 1488161467
     locked: 0

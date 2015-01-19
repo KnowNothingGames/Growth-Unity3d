@@ -1,0 +1,13 @@
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\Assembly-UnityScript-firstpass.dll
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Github\Growth---Unity-\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Github\Growth---Unity-\obj\Debug\UnityVS.Growth---Unity-.CSharp.csprojResolveAssemblyReference.cache
+C:\Github\Growth---Unity-\obj\Debug\Assembly-CSharp.dll
+C:\Github\Growth---Unity-\obj\Debug\Assembly-CSharp.pdb

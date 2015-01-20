@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.Growth-Unity3d.CSharp", "UnityVS.Growth-Unity3d.CSharp.csproj", "{35B29ACA-36ED-99BA-12F7-EBCA2927C684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.Growth-Unity3d.CSharp.Plugins", "UnityVS.Growth-Unity3d.CSharp.Plugins.csproj", "{7C8364C9-226F-2117-6881-EA693BAA4196}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35B29ACA-36ED-99BA-12F7-EBCA2927C684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B29ACA-36ED-99BA-12F7-EBCA2927C684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B29ACA-36ED-99BA-12F7-EBCA2927C684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B29ACA-36ED-99BA-12F7-EBCA2927C684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8364C9-226F-2117-6881-EA693BAA4196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8364C9-226F-2117-6881-EA693BAA4196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8364C9-226F-2117-6881-EA693BAA4196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8364C9-226F-2117-6881-EA693BAA4196}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

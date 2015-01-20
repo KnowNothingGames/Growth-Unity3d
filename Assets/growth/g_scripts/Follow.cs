@@ -17,8 +17,7 @@ public class Follow: MonoBehaviour {
     void Awake () {
 
 
-        vel = GameObject.FindGameObjectWithTag("Player").rigidbody2D;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+         player = GameObject.FindGameObjectWithTag("Player").transform;
         
 	
     }

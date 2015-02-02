@@ -90,9 +90,13 @@
     <Compile Include="Assets\growth\g_scripts\FollowPlayer.cs" />
     <Compile Include="Assets\growth\g_scripts\PlayerCamera.cs" />
     <Compile Include="Assets\growth\g_scripts\PlayerControl.cs" />
+    <Compile Include="Assets\growth\g_scripts\PlayerDamage.cs" />
     <Compile Include="Assets\growth\g_scripts\Remover.cs" />
-    <Compile Include="Assets\growth\g_scripts\Spell.cs" />
+    <Compile Include="Assets\growth\g_scripts\SpellCast.cs" />
     <Compile Include="Assets\growth\g_scripts\Sword.cs" />
+    <Compile Include="Assets\growth\g_scripts\UI_inGame.cs" />
+    <Compile Include="Assets\growth\g_scripts\_SpellImmolate.cs" />
+    <Compile Include="Assets\growth\g_scripts\_SpellShield.cs" />
     <Compile Include="Assets\growth\g_scripts\destroy.cs" />
     <Compile Include="Assets\growth\g_scripts\hit.cs" />
   </ItemGroup>

@@ -12,7 +12,8 @@ public class Follow: MonoBehaviour {
     private Transform player;
     private Transform inter;
     private Rigidbody2D vel;
-
+    public float moveForce = 365f;
+    public bool Move = false;
 
     void Awake () {
 
@@ -23,7 +24,7 @@ public class Follow: MonoBehaviour {
     }
 
     // Update is called once per frame
-	void Update(){
+	void FixedUpdate(){
 
         track();
 	}
@@ -46,7 +47,7 @@ public class Follow: MonoBehaviour {
 
     void track()
     {
-
+        float h = Input.GetAxis("Horizontal");
 
         
 
@@ -56,27 +57,43 @@ public class Follow: MonoBehaviour {
         float playerX = player.position.x;
         float playerY = player.position.y;
         //float smoother;
+
+
+       
+
+        Vector2 playerVec = GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position;
+        rigidbody2D.AddForce(playerVec * moveForce);
+
         
-        
+       
         // adjust smoothness according to velocity mag
         //smoother = smooth * vel.velocity.magnitude;
         
         if (CheckYMargin() || CheckXMargin())
         {
-                  
+
+         
             
-           
+
+
+
            //  smoother 
-           float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
-           float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
-            
-           
-           transform.position = new Vector3(xNew, yNew, 0);
+          // float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
+          // float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
+                    
+          // transform.position = new Vector3(xNew, yNew, 0);
+
+        
+
 
 
         }
         
 
+    }     
+            
+          
+   
+
     }
 
-}

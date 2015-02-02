@@ -43,8 +43,11 @@ GameObject:
   - 114: {fileID: 11428462}
   - 95: {fileID: 9528464}
   - 50: {fileID: 5028464}
-  - 114: {fileID: 11428464}
   - 61: {fileID: 6128464}
+  - 114: {fileID: 11402842}
+  - 114: {fileID: 11489118}
+  - 114: {fileID: 11402840}
+  - 114: {fileID: 11489120}
   m_Layer: 9
   m_Name: Drakaven
   m_TagString: Player
@@ -104,7 +107,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!61 &6128464
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -114,8 +117,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .600000024, y: .839999974}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: .5956828, y: .826649964}
+  m_Center: {x: .00434112549, y: .00798475742}
 --- !u!95 &9528464
 Animator:
   serializedVersion: 3
@@ -131,6 +134,33 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11402840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751e5955f6177fb40be1b80c966db969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCtrl: {fileID: 11428462}
+  explosion: {fileID: 100004, guid: 169b10ce10f4327cb9f40f6b117ed8d7, type: 2}
+  MP: {fileID: 0}
+  cost: 100
+  damage: 2
+--- !u!114 &11402842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231bd11db6a3944798e2c816e3a0692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11428460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,28 +188,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
-  jumps: 100
+  jumps: 3
   moveForce: 365
   maxSpeed: 5
   jumpClips: []
-  jumpForce: 1000
+  jumpForce: 1700
   taunts: []
   tauntProbability: 50
   tauntDelay: 1
---- !u!114 &11428464
+  currentSpellOne: _spellNull
+  currentSpellTwo: _spellNull
+  MP: {fileID: 11489118}
+--- !u!114 &11489118
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b1310f720052f48919fd1f92fbe994, type: 3}
+  m_Script: {fileID: 11500000, guid: 58af16e075a5d5c47a8a0ed7811dfab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword_collider: {fileID: 6148776, guid: 6b9220e9f015c904f9921d6bbcab25f2, type: 2}
-  speed: 0
-  playerCtrl: {fileID: 11428462}
+  HP: 10
+  Invinc: 0
+  MP: 500
+  MPMax: 500
+  Mregen: 1
+  mRegenRate: .200000003
+--- !u!114 &11489120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ffbe779ec5faee4cb204d43ef1d02c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MP: {fileID: 0}
+  on: 0
+  cost: 25
+  costDrain: .5
+  shield_collider: {fileID: 5818300, guid: 45176cb2b44166f4296c5253b018d8d1, type: 2}
 --- !u!212 &21228464
 SpriteRenderer:
   m_ObjectHideFlags: 1

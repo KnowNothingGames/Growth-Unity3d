@@ -23,15 +23,59 @@ public class PlayerControl : MonoBehaviour
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Animator anim;					// Reference to the player's animator component.
-
+    public string currentSpellOne = "_spellNull";
+    public string currentSpellTwo = "_spellNull";
+    public PlayerDamage MP;
 
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
 		anim = GetComponent<Animator>();
-	}
+        SpellFind();
+    }
 
+
+    
+    // search components for script that starts with "_Spell" reserveed for spells
+    // currently only look for two spells
+    void SpellFind()
+    {
+     Component[] find = GetComponents(typeof(Component));
+
+     foreach (Component item in find){
+    
+
+         string spellfound = item.GetType().Name;
+
+         Debug.Log(spellfound);
+         
+         string spellfoundsub = spellfound.Substring(0, 6);
+         
+         
+         if (spellfoundsub == "_Spell")
+        {
+
+            if (currentSpellOne == "_spellNull")
+            {
+                currentSpellOne = spellfound;
+            }
+            else
+            {
+                currentSpellTwo = spellfound;
+            }
+       }
+     
+     
+     }
+
+    }
+    
+
+
+
+
+    
     //** look into line cast
 	void Update()
 	{
@@ -44,15 +88,39 @@ public class PlayerControl : MonoBehaviour
             jumpcount = 0;
         }
 
-        
-        // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
-        if (Input.GetButtonDown("Jump") && grounded || Input.GetButtonDown("Jump") && jumpcount < jumps)
 
+        if (Input.GetButtonDown("Fire2"))
+        {
+           gameObject.GetComponent<SpellCast>().castspell(currentSpellOne);
+        }
+        if (Input.GetButtonUp("Fire2"))
+        {
+            gameObject.GetComponent<SpellCast>().castspell(currentSpellOne + "_cancel");
+        }
+          
+        
+        if (Input.GetButtonDown("Fire3"))
+        {
+            gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo);
+        }
+        if (Input.GetButtonUp("Fire3"))
+        {
+            gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo + "_cancel" );
+        }
+
+
+        // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
+        if (Input.GetButtonDown("Jump") && grounded || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f)
+            
             jump = true;
 	}
 
-    //fixed update is before each frame
-	// currently uses physics based movement - May want to change to Transform.Translate style
+      
+            
+           
+    
+    
+    
     
     void FixedUpdate ()
 	{
@@ -98,6 +166,8 @@ public class PlayerControl : MonoBehaviour
             jump = false;       
             
             // Make sure the player can't jump again until the jump conditions from Update are satisfied.
+            if (jumpcount > 0) { MP.spellCost(50f); }
+
             jumpcount += 1;
             
 		}

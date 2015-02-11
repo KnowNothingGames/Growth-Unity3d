@@ -40,7 +40,7 @@ public class PlayerDamage : MonoBehaviour {
     // set invincle to true and start the timer
     void OnCollisionEnter2D(Collision2D col)
     {
-        
+        //this needs t obe changed a get a value for hurt instead of being 1
         if (col.collider.tag == "Enemy" && Invinc == false)
         {
                       
@@ -65,7 +65,7 @@ public class PlayerDamage : MonoBehaviour {
 
     IEnumerator Invincible()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(0.5f);
         Invinc = false;
     
     }

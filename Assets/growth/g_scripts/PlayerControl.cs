@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public bool jump = false;				// Condition for whether the player should jump.
     private int jumpcount = 0;              // Counts jumps until grounded
+    
     public int jumps = 2;                   // jumps allowed before grounded again 2 = double jump 3 = triple etc
 	
     public float moveForce = 365f;			// Amount of force added to move the player left and right.
@@ -21,8 +22,16 @@ public class PlayerControl : MonoBehaviour
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
-	private bool grounded = false;			// Whether or not the player is grounded.
-	private Animator anim;					// Reference to the player's animator component.
+    private Transform weaponPoint;
+    private bool grounded = false;			// Whether or not the player is grounded.
+    private RaycastHit2D wallHit;
+    public bool walled = false;	        // are they touching a wall
+    public bool wallUsed = true;
+    private Collider2D newWallHit;
+    private Collider2D oldWallHit;
+    
+    
+    private Animator anim;					// Reference to the player's animator component.
     public string currentSpellOne = "_spellNull";
     public string currentSpellTwo = "_spellNull";
     public PlayerDamage MP;
@@ -31,7 +40,8 @@ public class PlayerControl : MonoBehaviour
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		anim = GetComponent<Animator>();
+        weaponPoint = transform.Find("weaponPoint");
+        anim = GetComponent<Animator>();
         SpellFind();
     }
 
@@ -79,15 +89,57 @@ public class PlayerControl : MonoBehaviour
     //** look into line cast
 	void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		// if grounded reset jumps
-        if (grounded)
-        { 
-            jumpcount = 0;
+        
+            
+        
+        // Is the player touching a wall, currently uses weapon point should probably added a new locator.
+
+
+        wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
+                                
+        // check to see if the last wall you hit was the same one, if it isnt update, if it is wallused = true
+        if (wallHit)
+        {
+            newWallHit = wallHit.collider;
+
+            if (newWallHit != oldWallHit)
+            {
+                oldWallHit = newWallHit;
+            }
+            else
+            {
+                wallUsed = true;
+            }
+
+        }
+        
+                
+        // clear out the walled if you jump off the wall
+        if (!wallHit )
+        {
+            wallUsed = false;
+        }
+        
+        // if your on the wall not ground and haven't used walljump, you can jump
+        if (wallHit && !grounded && wallUsed == false)
+        {
+            
+            // this will ensure wall jumps always cost magic 
+            jumpcount = jumps - 1;
+            wallUsed = true;
         }
 
+
+        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        
+        // if grounded reset jumps
+        if (grounded)
+        {
+            //wallUsed = false;
+            jumpcount = 0;
+        }
 
         if (Input.GetButtonDown("Fire2"))
         {
@@ -111,9 +163,11 @@ public class PlayerControl : MonoBehaviour
 
         // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
         if (Input.GetButtonDown("Jump") && grounded || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f)
-            
-            jump = true;
-	}
+            {
+                jump = true;
+
+            }
+	    }
 
       
             
@@ -124,7 +178,9 @@ public class PlayerControl : MonoBehaviour
     
     void FixedUpdate ()
 	{
-		// Cache the horizontal input.
+		
+       
+        // Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.

@@ -99,7 +99,6 @@
     <Compile Include="Assets\growth\g_scripts\_SpellShield.cs" />
     <Compile Include="Assets\growth\g_scripts\destroy.cs" />
     <Compile Include="Assets\growth\g_scripts\hit.cs" />
-    <Compile Include="Assets\growth\g_scripts\walkerAI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />

@@ -162,7 +162,7 @@ public class PlayerControl : MonoBehaviour
 
 
         // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
-        if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
+        if (Input.GetButtonDown("Jump") && grounded || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f)
             {
                 jump = true;
 
@@ -187,12 +187,12 @@ public class PlayerControl : MonoBehaviour
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-        if (h * rigidbody2D.velocity.x < maxSpeed && MP.KnockBackStun == false)
+		if(h * rigidbody2D.velocity.x < maxSpeed)
 			// ... add a force to the player.
-			rigidbody2D.AddForce(Vector2.right * h * moveForce );
+			rigidbody2D.AddForce(Vector2.right * h * moveForce);
 
 		// If the player's horizontal velocity is greater than the maxSpeed...
-        if (Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed && MP.KnockBackStun == false)
+		if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
 			// ... set the player's velocity to the maxSpeed in the x axis.
 			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 

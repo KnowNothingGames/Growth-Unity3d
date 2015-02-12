@@ -9,13 +9,7 @@ public class PlayerDamage : MonoBehaviour {
     public float MPMax;
     public bool Mregen = true;
     public float mRegenRate = 0.2f;
-    private float xKnock = 500f;
-    private float yKnock = 500f;
-    public float knockForce;
-    public bool KnockBackStun = false;
-    public SpriteRenderer drak;
-
-    // Use this for initialization
+        // Use this for initialization
 	void Start () {
 	
 	}
@@ -46,46 +40,14 @@ public class PlayerDamage : MonoBehaviour {
     // set invincle to true and start the timer
     void OnCollisionEnter2D(Collision2D col)
     {
-
         //this needs t obe changed a get a value for hurt instead of being 1
         if (col.collider.tag == "Enemy" && Invinc == false)
         {
-                       
+                      
             Hurt(1);
             Invinc = true;
             StartCoroutine(Invincible());
-           
-            StartCoroutine(knockBackStun());
-        // add knockback here
-            // if they are farther in the x knockback else knock forward
-            // same for y up and down
-            if             
-            (col.collider.transform.position.x > rigidbody2D.transform.position.x)
-            {
-            xKnock = -knockForce;
-            }
-            else
-            {
-            xKnock = knockForce;
-            }
-            if
-           (col.collider.transform.position.y > rigidbody2D.transform.position.y)
-            {
-                yKnock = -knockForce /6;
-            }
-            else
-            {
-                yKnock = knockForce /6;
-            }
-
-
             
-            //rigidbody2D.velocity = (new Vector2(0f, rigidbody2D.velocity.y));
-            rigidbody2D.AddForce(new Vector2(xKnock, yKnock));
-            KnockBackStun = true;
-            //set the alpha to  the last float
-            drak.color = new Color(1f, 1f, 1f, 0.65f);
-        
         }
     }
 
@@ -103,23 +65,10 @@ public class PlayerDamage : MonoBehaviour {
 
     IEnumerator Invincible()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         Invinc = false;
-        
-        // set the alpha back to full
-        drak.color = new Color(1f, 1f, 1f, 1f);
+    
     }
-
-    IEnumerator knockBackStun()
-    {
-        yield return new WaitForSeconds(0.3f);
-        KnockBackStun = false;
-
-    }
-
-
-
-
 
     IEnumerator MPregen()
     {

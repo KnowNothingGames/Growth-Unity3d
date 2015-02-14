@@ -1,1 +1,1 @@
-To get started, <a href="https://www.clahub.com/agreements/KnowNothingGames/Growth-Unity3d">sign the Contributor License Agreement</a>.
+To get started, <a href="https://www.knownothinggames.com">Know NOthing Games</a>. I am not sure yet, I would welcome input.

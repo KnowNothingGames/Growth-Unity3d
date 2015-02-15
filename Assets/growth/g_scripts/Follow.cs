@@ -8,13 +8,16 @@ public class Follow: MonoBehaviour {
 
     public float xMargin = 1f;		// Distance in the x axis the player can move before the camera follows.
     public float yMargin = 1f;		// Distance in the y axis the player can move before the camera follows.
-    public float smooth = 1f;
+    public float smooth = 0.5f;
     private Transform player;
     private Transform inter;
-    private Rigidbody2D vel;
+    //private Rigidbody2D vel;
     public float moveForce = 365f;
     public bool Move = false;
 
+    
+    //changed to translate lerp
+    
     void Awake () {
 
 
@@ -62,9 +65,15 @@ public class Follow: MonoBehaviour {
        
 
         Vector2 playerVec = GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position;
-        rigidbody2D.AddForce(playerVec * moveForce);
+      //  rigidbody2D.AddForce(playerVec * moveForce);
 
-        
+
+
+
+         float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
+         float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
+
+         transform.position = new Vector3(xNew, yNew, 0);
        
         // adjust smoothness according to velocity mag
         //smoother = smooth * vel.velocity.magnitude;

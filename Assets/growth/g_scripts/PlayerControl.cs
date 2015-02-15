@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
 	public bool facingRight = true;			// For determining which way the player is currently facing.
 	[HideInInspector]
 	public bool jump = false;				// Condition for whether the player should jump.
-    private int jumpcount = 0;              // Counts jumps until grounded
+    public int jumpcount = 0;              // Counts jumps until grounded
     
     public int jumps = 2;                   // jumps allowed before grounded again 2 = double jump 3 = triple etc
 	
@@ -36,7 +36,18 @@ public class PlayerControl : MonoBehaviour
     public string currentSpellTwo = "_spellNull";
     public PlayerDamage MP;
 
-	void Awake()
+    public float wallStick = 0.1f;
+    public float wallGrav = 2f;
+    public float wallGravDur = 05f;
+    
+    private float wTime;
+
+    private float jumpTime;
+    public float hangTime;
+    public float jBoost;
+    private bool boost;
+
+    void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
@@ -58,8 +69,7 @@ public class PlayerControl : MonoBehaviour
 
          string spellfound = item.GetType().Name;
 
-         Debug.Log(spellfound);
-         
+                 
          string spellfoundsub = spellfound.Substring(0, 6);
          
          
@@ -90,56 +100,31 @@ public class PlayerControl : MonoBehaviour
 	void Update()
 	{
 
-        
+
+
+        // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
+        if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
+        {
+
+            jumpcount += 1;
+            jump = true;
+            jumpTime = Time.time;
+            if (jumpcount > 1) { MP.spellCost(50f); }
+
             
-        
-        // Is the player touching a wall, currently uses weapon point should probably added a new locator.
 
-
-        wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
-                                
-        // check to see if the last wall you hit was the same one, if it isnt update, if it is wallused = true
-        if (wallHit)
-        {
-            newWallHit = wallHit.collider;
-
-            if (newWallHit != oldWallHit)
-            {
-                oldWallHit = newWallHit;
-            }
-            else
-            {
-                wallUsed = true;
-            }
 
         }
-        
-                
-        // clear out the walled if you jump off the wall
-        if (!wallHit )
+        // I think this is what is might be causeing the inconsitant jumps
+        if (Input.GetButtonUp("Jump") || Time.time > jumpTime + hangTime)
         {
-            wallUsed = false;
+            jump = false;
+            boost = true;
+            // Make sure the player can't jump again until the jump conditions from Update are satisfied.
+
         }
-        
-        // if your on the wall not ground and haven't used walljump, you can jump
-        if (wallHit && !grounded && wallUsed == false)
-        {
+       
             
-            // this will ensure wall jumps always cost magic 
-            jumpcount = jumps - 1;
-            wallUsed = true;
-        }
-
-
-        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        
-        // if grounded reset jumps
-        if (grounded)
-        {
-            //wallUsed = false;
-            jumpcount = 0;
-        }
 
         if (Input.GetButtonDown("Fire2"))
         {
@@ -161,25 +146,101 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
-        if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
-            {
-                jump = true;
-
-            }
+        
 	    }
 
       
-            
-           
-    
-    
-    
-    
+      
     void FixedUpdate ()
 	{
-		
+
+
+        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        // if grounded reset jumps
+        if (grounded)
+        {
+            //wallUsed = false;
+            jumpcount = 0;
+        }
+         // Is the player touching a wall, currently uses weapon point should probably added a new locator.
+
+
+        wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
+                                
+        // check to see if the last wall you hit was the same one, if it isnt update, if it is wallused = true
+        if (wallHit)
+        {
+            newWallHit = wallHit.collider;
+                                     
+            // if you hit a new wall stick to the wall for float amount of time - this makes wall jump a lot easier                         
+            if (newWallHit != oldWallHit)
+            {
+                oldWallHit = newWallHit;
+                wallStick = Time.time + wallGravDur; 
+                       
+            }
+            else
+            {
+                wallUsed = true;
+            }
+                               
+            if (Time.time < wallStick)
+            {
+                gameObject.rigidbody2D.gravityScale = wallGrav;
+            }
+
+            // if not set back to 3
+            else
+            {
+                gameObject.rigidbody2D.gravityScale = 3.5f;
+            }
        
+       }
+        
+                
+        // clear out the walled if you jump off the wall
+        if (!wallHit )
+        {
+            wallUsed = false;
+        }
+        
+        // if your on the wall not ground and haven't used walljump, you can jump
+        if (wallHit && !grounded && wallUsed == false)
+        {
+            
+            // this will ensure wall jumps always cost magic 
+            jumpcount = jumps - 1;
+            wallUsed = true;
+        }
+
+           
+
+        // If the player should jump...
+        if (jump)
+        {
+            // Set the Jump animator trigger parameter.
+            anim.SetTrigger("Jump");
+
+            // Play a random jump audio clip.
+            //int i = Random.Range(0, jumpClips.Length);
+            //AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
+
+            // Add a vertical force to the player.
+
+            // if this is the first frame of the jump times the force by the float
+            if (boost == true)
+            {
+                rigidbody2D.AddForce(new Vector2(0f, jumpForce * jBoost));
+                boost = false;
+            }
+            rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            
+        }
+
+
+        
         // Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 
@@ -205,28 +266,7 @@ public class PlayerControl : MonoBehaviour
 			// ... flip the player.
 			Flip();
 
-		// If the player should jump...
-		if(jump) 
-		{
-			// Set the Jump animator trigger parameter.
-			anim.SetTrigger("Jump");
-
-			// Play a random jump audio clip.
-			//int i = Random.Range(0, jumpClips.Length);
-			//AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
-
-			// Add a vertical force to the player.
-			rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-
-
-            jump = false;       
-            
-            // Make sure the player can't jump again until the jump conditions from Update are satisfied.
-            if (jumpcount > 0) { MP.spellCost(50f); }
-
-            jumpcount += 1;
-            
-		}
+		
 	}
 	
 	

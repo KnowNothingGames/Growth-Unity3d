@@ -3,52 +3,93 @@ using System.Collections;
 
 public class walkerAI : MonoBehaviour {
 
-    public float moveSpeed = 2f;		// The speed the enemy moves at.
-    public int HP = 2;					// How many times the enemy can be hit before it dies.
-    public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
-    public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
-    public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
-    public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
-    public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
-    public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-
-
-    private SpriteRenderer ren;			// Reference to the sprite renderer.
-    private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
-    private bool dead = false;			// Whether or not the enemy is dead.
-    private Score score;				// Reference to the Score script.
-
+    
+    public float xMargin = 1f;		// Distance in the x axis the player can move before the camera follows.
+    public float yMargin = 1f;		// Distance in the y axis the player can move before the camera follows.
+    public float smooth = 1f;
+    private Transform player;
+    private Transform inter;
+    private Rigidbody2D vel;
+    public float moveForce = 365f;
+    public bool Move = false;
 
     void Awake()
     {
 
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+
     }
 
+    // Update is called once per frame
     void FixedUpdate()
     {
 
-
-        // If the enemy has one hit point left and has a damagedEnemy sprite...
-        //	if(HP == 1 && damagedEnemy != null)
-        // ... set the sprite renderer's sprite to be the damagedEnemy sprite.
-        //ren.sprite = damagedEnemy;
-
-        // If the enemy has zero or fewer hit points and isn't dead yet...
-        if (HP <= 0 && !dead)
-            // ... call the death function.
-            Death();
+        track();
     }
 
-    public void Hurt(int x)
+
+    bool CheckXMargin()
     {
-        // Reduce the number of hit points by one.
-        HP = HP - x;
+        // Returns true if the distance between the camera and the player in the x axis is greater than the x margin.
+        return Mathf.Abs(transform.position.x - player.position.x) > xMargin;
     }
 
-    void Death()
+
+    bool CheckYMargin()
     {
-        Destroy(gameObject);
+        // Returns true if the distance between the camera and the player in the y axis is greater than the y margin.
+        return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
     }
 
+
+
+    void track()
+    {
+        float h = Input.GetAxis("Horizontal");
+
+
+
+        float cameraX = transform.position.x;
+        float cameraY = transform.position.y;
+
+        float playerX = player.position.x;
+        float playerY = player.position.y;
+        //float smoother;
+
+
+
+
+        Vector2 playerVec = GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position;
+        rigidbody2D.AddForce(playerVec * moveForce);
+
+
+
+        // adjust smoothness according to velocity mag
+        //smoother = smooth * vel.velocity.magnitude;
+
+        if (CheckYMargin() || CheckXMargin())
+        {
+
+
+
+
+
+
+            //  smoother 
+            // float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
+            // float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
+
+            // transform.position = new Vector3(xNew, yNew, 0);
+
+
+
+
+
+        }
+
+
+    }    
 
 }

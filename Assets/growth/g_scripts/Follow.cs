@@ -15,7 +15,9 @@ public class Follow: MonoBehaviour {
     public float moveForce = 365f;
     public bool Move = false;
 
-    
+    private float xKnock = 5000f;
+    private float yKnock = 5000f;
+    public float knockForce;
     //changed to translate lerp
     
     void Awake () {
@@ -52,7 +54,7 @@ public class Follow: MonoBehaviour {
     {
         float h = Input.GetAxis("Horizontal");
 
-        
+
 
         float cameraX = transform.position.x;
         float cameraY = transform.position.y;
@@ -62,41 +64,31 @@ public class Follow: MonoBehaviour {
         //float smoother;
 
 
-       
 
+        // move using addfroce
         Vector2 playerVec = GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position;
-      //  rigidbody2D.AddForce(playerVec * moveForce);
+        //  rigidbody2D.AddForce(playerVec * moveForce);
 
 
 
+        // move using transfrom
+        float xNew = Mathf.Lerp(cameraX, playerX, Time.deltaTime * smooth);
+        float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
 
-         float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
-         float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
+      //  transform.position = new Vector3(xNew, yNew, 0);
+        
 
-         transform.position = new Vector3(xNew, yNew, 0);
-       
+        // using move position to move characters
+        Vector2 speed = new Vector2(3, 0);
+        rigidbody2D.MovePosition(rigidbody2D.position + speed * Time.deltaTime);
         // adjust smoothness according to velocity mag
         //smoother = smooth * vel.velocity.magnitude;
-        
-        if (CheckYMargin() || CheckXMargin())
-        {
 
-         
-            
+    }
 
 
+    
 
-           //  smoother 
-          // float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smooth);
-          // float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smooth);
-                    
-          // transform.position = new Vector3(xNew, yNew, 0);
-
-        
-
-
-
-        }
         
 
     }     
@@ -104,5 +96,5 @@ public class Follow: MonoBehaviour {
           
    
 
-    }
+    
 

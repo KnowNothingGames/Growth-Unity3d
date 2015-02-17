@@ -42,12 +42,12 @@ GameObject:
   - 212: {fileID: 21228464}
   - 114: {fileID: 11428462}
   - 95: {fileID: 9528464}
-  - 50: {fileID: 5028464}
   - 61: {fileID: 6128464}
   - 114: {fileID: 11402842}
   - 114: {fileID: 11489118}
   - 114: {fileID: 11402840}
   - 114: {fileID: 11489120}
+  - 50: {fileID: 5085118}
   m_Layer: 9
   m_Name: Drakaven
   m_TagString: Player
@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0299999993, y: -.49000001, z: 0}
+  m_LocalPosition: {x: .0299999993, y: -.441000015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 428464}
@@ -86,28 +86,28 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.89220452, y: -.0261427835, z: 0}
+  m_LocalPosition: {x: 2.53999996, y: -.0299999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428462}
   - {fileID: 428460}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5028464
+--- !u!50 &5085118
 Rigidbody2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128464}
   m_Mass: 1
-  m_LinearDrag: 15
+  m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 2
+  m_GravityScale: 3.5
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!61 &6128464
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword_collider: {fileID: 6148776, guid: 6b9220e9f015c904f9921d6bbcab25f2, type: 2}
   speed: 20
+  MP: {fileID: 0}
   playerCtrl: {fileID: 11428462}
 --- !u!114 &11428462
 MonoBehaviour:
@@ -188,17 +189,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
-  jumps: 3
+  jumpcount: 0
+  jumps: 1
   moveForce: 365
-  maxSpeed: 5
+  maxSpeed: 4.5
   jumpClips: []
-  jumpForce: 1700
+  jumpForce: 450
   taunts: []
   tauntProbability: 50
   tauntDelay: 1
+  walled: 0
+  wallUsed: 1
   currentSpellOne: _spellNull
   currentSpellTwo: _spellNull
   MP: {fileID: 11489118}
+  wallGrav: 2
+  hangTime: .150000006
+  jBoost: 1.5
 --- !u!114 &11489118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,10 +219,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   Invinc: 0
-  MP: 500
-  MPMax: 500
+  MP: 2000
+  MPMax: 2000
   Mregen: 1
-  mRegenRate: .200000003
+  mRegenRate: .5
+  knockForce: 1500
+  KnockBackStun: 0
+  drak: {fileID: 21228464}
 --- !u!114 &11489120
 MonoBehaviour:
   m_ObjectHideFlags: 1

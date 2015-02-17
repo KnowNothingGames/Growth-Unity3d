@@ -36,9 +36,9 @@ public class PlayerControl : MonoBehaviour
     public string currentSpellTwo = "_spellNull";
     public PlayerDamage MP;
 
-    public float wallStick = 0.1f;
+   
     public float wallGrav = 2f;
-    public float wallGravDur = 05f;
+   
     
     private float wTime;
 
@@ -105,12 +105,16 @@ public class PlayerControl : MonoBehaviour
         // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
         if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
         {
-
             jumpcount += 1;
+           
             jump = true;
+            anim.SetTrigger("jump");
             jumpTime = Time.time;
-            if (jumpcount > 1) { MP.spellCost(50f); }
+            if (!grounded) { 
+                MP.spellCost(50f); 
+            }
 
+            
             
 
 
@@ -154,17 +158,24 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate ()
 	{
 
-
+        anim.SetBool("grounded", grounded);
+        anim.SetBool("wallUsed", wallUsed);
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-
+        
         // if grounded reset jumps
         if (grounded)
         {
-            //wallUsed = false;
             jumpcount = 0;
         }
          // Is the player touching a wall, currently uses weapon point should probably added a new locator.
+
+
+        if (wallUsed == false)
+        {
+            gameObject.rigidbody2D.gravityScale = 3.5f;
+        }
+
 
 
         wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
@@ -178,32 +189,32 @@ public class PlayerControl : MonoBehaviour
             if (newWallHit != oldWallHit)
             {
                 oldWallHit = newWallHit;
-                wallStick = Time.time + wallGravDur; 
+               
                        
             }
             else
             {
                 wallUsed = true;
+                
             }
-                               
-            if (Time.time < wallStick)
+                  
+        
+            if (wallUsed && ! grounded)
             {
                 gameObject.rigidbody2D.gravityScale = wallGrav;
+                
+            
             }
 
-            // if not set back to 3
-            else
-            {
-                gameObject.rigidbody2D.gravityScale = 3.5f;
-            }
-       
-       }
+           
+        }
         
                 
         // clear out the walled if you jump off the wall
         if (!wallHit )
         {
             wallUsed = false;
+            
         }
         
         // if your on the wall not ground and haven't used walljump, you can jump
@@ -213,6 +224,8 @@ public class PlayerControl : MonoBehaviour
             // this will ensure wall jumps always cost magic 
             jumpcount = jumps - 1;
             wallUsed = true;
+                   
+        
         }
 
            
@@ -240,7 +253,9 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        
+        // horizontal movement
+
+
         // Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 

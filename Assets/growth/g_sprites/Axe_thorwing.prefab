@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 402868}
   - 212: {fileID: 21202868}
   - 61: {fileID: 6102868}
-  - 114: {fileID: 11402868}
   - 50: {fileID: 5055980}
+  - 114: {fileID: 11416264}
   m_Layer: 0
   m_Name: Axe_thorwing
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.33699989, y: -.0420000032, z: 0}
+  m_LocalPosition: {x: 1.92712724, y: .259614617, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,10 +54,10 @@ BoxCollider2D:
   m_GameObject: {fileID: 102868}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: .430000007, y: .519999981}
   m_Center: {x: 0, y: 0}
---- !u!114 &11402868
+--- !u!114 &11416264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,11 +65,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 102868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f35ec4d96885cdc4c957f1821ed8e785, type: 3}
+  m_Script: {fileID: 11500000, guid: e0f7b72912fc1224b9febd658a158a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  upframes: 3
+  damage: 1
+  upframes: 6
 --- !u!212 &21202868
 SpriteRenderer:
   m_ObjectHideFlags: 1

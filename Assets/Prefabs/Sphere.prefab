@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11432630}
   - 58: {fileID: 5832630}
   - 114: {fileID: 11417388}
+  - 50: {fileID: 5067686}
   m_Layer: 10
   m_Name: Sphere
   m_TagString: Enemy
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.28000021, y: 10.9899998, z: 0}
+  m_LocalPosition: {x: -2.79999995, y: -.0500000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,6 +60,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132630}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &5067686
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132630}
+  m_Mass: 10
+  m_LinearDrag: 1
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!58 &5832630
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -67,7 +83,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 132630}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .532549322
   m_Center: {x: 5.96046448e-08, y: 0}
 --- !u!114 &11417388
@@ -105,6 +121,7 @@ MonoBehaviour:
   smooth: 1
   moveForce: 3
   Move: 0
+  knockForce: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

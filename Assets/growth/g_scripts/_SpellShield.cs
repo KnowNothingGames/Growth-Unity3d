@@ -19,22 +19,23 @@ public CircleCollider2D shield_collider;
 	// Update is called once per frame
 	void Update () {
 
-
+        
         // debt mp and stop regen
         if (on == true) {
             MP.spellCost(costDrain);
-        
+            MP.Invinc = true;
         // if not enough mana turn off   
         }
         if (MP.MP < costDrain)
         {
             on = false;
-
+            MP.Invinc = false;
         }
         
         // destroy if no mana or cancel called
         if (on == false)
         {
+            MP.Invinc = false;
             Destroy(GameObject.Find("shield_collider(Clone)"));
         }
 

@@ -52,6 +52,8 @@ public class PlayerControl : MonoBehaviour
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
         weaponPoint = transform.Find("weaponPoint");
+        currentSpellOne = "_spellNull";
+        currentSpellTwo = "_spellNull";
         anim = GetComponent<Animator>();
         SpellFind();
     }
@@ -83,6 +85,8 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 currentSpellTwo = spellfound;
+                Debug.Log(currentSpellTwo);
+            
             }
        }
      

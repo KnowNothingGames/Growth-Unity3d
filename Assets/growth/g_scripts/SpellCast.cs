@@ -38,7 +38,14 @@ public class SpellCast : MonoBehaviour {
         {
             gameObject.GetComponent<_SpellShield>().cancel();
         }
-
+        else if (spellfound == "_SpellAxe")
+        {
+            gameObject.GetComponent<_SpellAxe>().castMe();
+        }
+        else if (spellfound == "_SpellAxe_cancel")
+        {
+            gameObject.GetComponent<_SpellAxe>().cancel();
+        }
 
 
 

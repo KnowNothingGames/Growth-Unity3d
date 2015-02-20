@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
 
     
     // search components for script that starts with "_Spell" reserveed for spells
-    // currently only look for two spells
+    // currently only looks for two spells
     void SpellFind()
     {
      Component[] find = GetComponents(typeof(Component));
@@ -95,11 +95,7 @@ public class PlayerControl : MonoBehaviour
 
     }
     
-
-
-
-
-    
+        
     //** look into line cast
 	void Update()
 	{
@@ -107,8 +103,11 @@ public class PlayerControl : MonoBehaviour
 
 
         // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
+        // as it stands right now you can double jump up a wall. then do wall jumping - not sure if I like this. 
         if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
         {
+            
+            //grounded will reset this to quickly for it to register the first jump so it will only count after the first jump
             jumpcount += 1;
            
             jump = true;
@@ -117,10 +116,6 @@ public class PlayerControl : MonoBehaviour
             if (!grounded) { 
                 MP.spellCost(50f); 
             }
-
-            
-            
-
 
         }
         // I think this is what is might be causeing the inconsitant jumps
@@ -132,8 +127,6 @@ public class PlayerControl : MonoBehaviour
 
         }
        
-            
-
         if (Input.GetButtonDown("Fire2"))
         {
            gameObject.GetComponent<SpellCast>().castspell(currentSpellOne);
@@ -179,9 +172,7 @@ public class PlayerControl : MonoBehaviour
         {
             gameObject.rigidbody2D.gravityScale = 3.5f;
         }
-
-
-
+        
         wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
                                 
         // check to see if the last wall you hit was the same one, if it isnt update, if it is wallused = true
@@ -193,24 +184,20 @@ public class PlayerControl : MonoBehaviour
             if (newWallHit != oldWallHit)
             {
                 oldWallHit = newWallHit;
-               
-                       
+                                
             }
             else
             {
                 wallUsed = true;
-                
             }
                   
         
             if (wallUsed && ! grounded)
             {
                 gameObject.rigidbody2D.gravityScale = wallGrav;
-                
-            
+                        
             }
-
-           
+         
         }
         
                 
@@ -218,25 +205,25 @@ public class PlayerControl : MonoBehaviour
         if (!wallHit )
         {
             wallUsed = false;
-            
         }
         
         // if your on the wall not ground and haven't used walljump, you can jump
         if (wallHit && !grounded && wallUsed == false)
         {
-            
-            // this will ensure wall jumps always cost magic 
-            jumpcount = jumps - 1;
+         // this will ensure wall jumps always cost magic 
+         
+            jumpcount = jumps -1;
             wallUsed = true;
-                   
-        
-        }
+                  
+         }
 
            
 
         // If the player should jump...
         if (jump)
         {
+            
+            
             // Set the Jump animator trigger parameter.
             anim.SetTrigger("Jump");
 

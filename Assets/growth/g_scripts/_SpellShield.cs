@@ -4,6 +4,7 @@ using System.Collections;
 public class _SpellShield : MonoBehaviour {
 public PlayerDamage MP;
 public bool on;
+private bool wasOn;
 public float cost = 50f;
 public float costDrain = 0.5f;
 public CircleCollider2D shield_collider; 
@@ -12,7 +13,13 @@ public CircleCollider2D shield_collider;
 	void Start () {
 
         MP = gameObject.GetComponent<PlayerDamage>();
+        // required to not interfere with other knockback invinc
+        // this could become a problem when other invinc conditions start to apply
+        // much like stun how to get different causes to not undo the same effect
+        // I guess you could have an initate by feature.
+        // also we should generat a new script called conditions
 
+        wasOn = false;
 
 	}
 	
@@ -24,18 +31,24 @@ public CircleCollider2D shield_collider;
         if (on == true) {
             MP.spellCost(costDrain);
             MP.Invinc = true;
-        // if not enough mana turn off   
+            wasOn = true;
+            // if not enough mana turn off   
         }
         if (MP.MP < costDrain)
         {
             on = false;
-            MP.Invinc = false;
+           
         }
         
         // destroy if no mana or cancel called
         if (on == false)
         {
+            // this will allow it to not interfere with invinc 
+            if (wasOn == true) {
             MP.Invinc = false;
+            wasOn = false;
+            }
+            
             Destroy(GameObject.Find("shield_collider(Clone)"));
         }
 

@@ -56,19 +56,19 @@ TextureImporter:
         x: 10
         y: 420
         width: 62
-        height: 83
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_VN_1
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 420
-        width: 154
         height: 84
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 419
+        width: 154
+        height: 84
+      alignment: 9
+      pivot: {x: .280000001, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: character_VN_2
       rect:
@@ -90,15 +90,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_VN_4
+    - name: 
       rect:
         serializedVersion: 2
         x: 325
-        y: 276
-        width: 47
+        y: 279
+        width: 36
         height: 118
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 4
+      pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: character_VN_5
       rect:

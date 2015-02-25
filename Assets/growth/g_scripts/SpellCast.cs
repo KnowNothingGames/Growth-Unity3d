@@ -6,7 +6,7 @@ public class SpellCast : MonoBehaviour {
     //register all spells here
 	private _SpellImmolate _SpellImmolate;
     private _SpellShield _SpellShield;
-    
+    private _SpellAxe _SpellAxe;
     
     // Use this for initialization
 	void Start () {
@@ -22,6 +22,11 @@ public class SpellCast : MonoBehaviour {
     public void castspell(string spellfound)
     {
 
+        
+                  
+        
+        
+        
         if (spellfound == "_SpellImmolate")
         {
             gameObject.GetComponent<_SpellImmolate>().castMe();

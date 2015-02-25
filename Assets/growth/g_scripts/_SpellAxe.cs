@@ -63,4 +63,40 @@ public class _SpellAxe : MonoBehaviour {
     }
 
 
+    public void castAxe()
+    {
+
+
+
+        if ((Time.time - lastattack) > 0.2 && MP.MP >= 50f)
+        {
+            MP.spellCost(50f);
+
+            BoxCollider2D weaponInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
+
+
+
+            if (playerCtrl.facingRight)
+            {
+
+                weaponInstance.rigidbody2D.AddForce(new Vector2(250f, 600f));
+                weaponInstance.rigidbody2D.AddTorque(-1000f);
+
+            }
+            else
+            {
+                weaponInstance.rigidbody2D.AddForce(new Vector2(-250f, 600f));
+                weaponInstance.rigidbody2D.AddTorque(-1000f);
+            }
+
+
+            lastattack = Time.time;
+
+        }
+
+    }
+
+
+
+
 }

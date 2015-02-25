@@ -32,8 +32,11 @@ public class PlayerControl : MonoBehaviour
     
     
     private Animator anim;					// Reference to the player's animator component.
-    public string currentSpellOne = "_spellNull";
-    public string currentSpellTwo = "_spellNull";
+    
+    public string currentSpellOne;
+    public string currentSpellTwo;
+        
+    
     public PlayerDamage MP;
 
    
@@ -94,8 +97,11 @@ public class PlayerControl : MonoBehaviour
      }
 
     }
+
+
+
     
-        
+
     //** look into line cast
 	void Update()
 	{
@@ -139,15 +145,20 @@ public class PlayerControl : MonoBehaviour
         
         if (Input.GetButtonDown("Fire3"))
         {
+
+           
             gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo);
         }
         if (Input.GetButtonUp("Fire3"))
         {
-            gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo + "_cancel" );
+           gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo + "_cancel" );
         }
 
+       
 
-        
+       
+
+
 	    }
 
       

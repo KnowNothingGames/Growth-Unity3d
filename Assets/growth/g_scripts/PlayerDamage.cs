@@ -9,8 +9,8 @@ public class PlayerDamage : MonoBehaviour {
     public float MPMax;
     public bool Mregen = true;
     public float mRegenRate = 0.2f;
-    private float xKnock = 500f;
-    private float yKnock = 500f;
+    private float xKnock;
+    private float yKnock;
     public float knockForce;
     public bool KnockBackStun = false;
     public SpriteRenderer drak;
@@ -24,8 +24,15 @@ public class PlayerDamage : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       
-         
+
+        
+        // if you fall below 50 you die
+        if (gameObject.transform.position.y < -50)
+        {
+            Death();
+        } 
+
+
         // if regen is true and you are less than max add to MP
         if (Mregen == true && MP < MPMax ) { 
         MP += mRegenRate;
@@ -51,8 +58,10 @@ public class PlayerDamage : MonoBehaviour {
         //this needs t obe changed a get a value for hurt instead of being 1
         if (col.collider.tag == "Enemy" && Invinc == false)
         {
-                       
-            Hurt(1);
+            // go get the damage cause by collision with an emeny this is no controlled on the enemy script
+            Enemy knockD = col.gameObject.GetComponent<Enemy>();
+            knockForce = knockD.KnockForce;
+            Hurt(knockD.knockDam);
             Invinc = true;
             StartCoroutine(Invincible());
            
@@ -60,8 +69,8 @@ public class PlayerDamage : MonoBehaviour {
         // add knockback here
             // if they are farther in the x knockback else knock forward
             // same for y up and down but currently only one sixth the force
-
             
+                       
 
                 if
                 (col.collider.transform.position.x > rigidbody2D.transform.position.x)
@@ -139,9 +148,11 @@ public class PlayerDamage : MonoBehaviour {
         HP = HP - x;
     }
 
+    // you die and the level reloads
     void Death()
     {
         Destroy(gameObject);
+        Application.LoadLevel("growth_1");
     }
 
 }

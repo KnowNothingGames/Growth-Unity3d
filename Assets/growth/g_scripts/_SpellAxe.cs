@@ -9,7 +9,11 @@ public class _SpellAxe : MonoBehaviour {
     public PlayerDamage MP;
     public float cost = 50f;
     private float lastattack = 0;
-    
+    public float torque = -1000f;
+    public float xForce = 250f;
+    public float yForce = 600f;
+    public float bonusForce = 0f;
+    public float bonusMultiply = 50f;
     // Use this for initialization
 
   
@@ -24,8 +28,15 @@ public class _SpellAxe : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+         
 	}
+
+    void FixedUpdate()
+    {     
+    bonusForce = gameObject.rigidbody2D.velocity.x * bonusMultiply; 
+    }
+
+
 
     public void cancel() { }
 
@@ -34,25 +45,25 @@ public class _SpellAxe : MonoBehaviour {
 
 
 
-        if ((Time.time - lastattack) > 0.2 && MP.MP >= 50f)
+        if ((Time.time - lastattack) > 0.2 && MP.MP >= cost)
         {
-            MP.spellCost(50f);
+            MP.spellCost(cost);
 
             BoxCollider2D weaponInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
-
+            
 
 
             if (playerCtrl.facingRight)
             {
 
-                weaponInstance.rigidbody2D.AddForce(new Vector2(250f, 600f));
-                weaponInstance.rigidbody2D.AddTorque(-1000f);
+                weaponInstance.rigidbody2D.AddForce(new Vector2(xForce + bonusForce, yForce));
+                weaponInstance.rigidbody2D.AddTorque(torque);
 
             }
             else
             {
-                weaponInstance.rigidbody2D.AddForce(new Vector2(-250f, 600f));
-                weaponInstance.rigidbody2D.AddTorque(-1000f);
+                weaponInstance.rigidbody2D.AddForce(new Vector2(-xForce + bonusForce, yForce));
+                weaponInstance.rigidbody2D.AddTorque(torque);
             }
 
 
@@ -70,23 +81,27 @@ public class _SpellAxe : MonoBehaviour {
 
         if ((Time.time - lastattack) > 0.2 && MP.MP >= 50f)
         {
+           
+            
             MP.spellCost(50f);
+            
+
 
             BoxCollider2D weaponInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
-
+            
 
 
             if (playerCtrl.facingRight)
             {
 
-                weaponInstance.rigidbody2D.AddForce(new Vector2(250f, 600f));
-                weaponInstance.rigidbody2D.AddTorque(-1000f);
+                weaponInstance.rigidbody2D.AddForce(new Vector2(xForce + bonusForce, yForce));
+                weaponInstance.rigidbody2D.AddTorque(torque);
 
             }
             else
             {
-                weaponInstance.rigidbody2D.AddForce(new Vector2(-250f, 600f));
-                weaponInstance.rigidbody2D.AddTorque(-1000f);
+                weaponInstance.rigidbody2D.AddForce(new Vector2(-xForce + bonusForce, yForce));
+                weaponInstance.rigidbody2D.AddTorque(torque);
             }
 
 

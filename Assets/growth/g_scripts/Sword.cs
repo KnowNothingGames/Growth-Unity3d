@@ -7,8 +7,10 @@ public class Sword : MonoBehaviour {
     public float speed = 20f;
     private float lastattack = 0;
     public PlayerDamage MP;
-    
-	private Animator anim;
+    public bool attk = false;
+    public float nxtAttk = 0.3f;
+	
+    private Animator anim;
     public PlayerControl playerCtrl;
 
 	// Use this for initialization
@@ -19,7 +21,9 @@ public class Sword : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (attk == true && (Time.time - lastattack) > nxtAttk) {
+            attk = false;
+        }
               
         // this may need to be moved to player controller and use a find like spellfind
         if(Input.GetButtonDown("Fire1"))
@@ -27,11 +31,11 @@ public class Sword : MonoBehaviour {
 			
 
            
-           if ((Time.time - lastattack) > 0.3  && MP.MP >=25f)
+           if ((Time.time - lastattack) > nxtAttk  && MP.MP >=25f)
             {
                 MP.spellCost(25f);
                 anim.SetTrigger("attack");
-
+                attk = true;
 
                 if (playerCtrl.facingRight)
                 {

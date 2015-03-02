@@ -38,11 +38,11 @@ public class PlayerControl : MonoBehaviour
         
     
     public PlayerDamage MP;
-
+    public GameObject weapon;
    
     public float wallGrav = 2f;
-   
-    
+
+    private Sword attacking;
     private float wTime;
 
     private float jumpTime;
@@ -58,6 +58,10 @@ public class PlayerControl : MonoBehaviour
         currentSpellOne = "_spellNull";
         currentSpellTwo = "_spellNull";
         anim = GetComponent<Animator>();
+        // this is not great going to have to have a method for getting the weapon like getting the spell
+        attacking = weapon.GetComponent<Sword>();
+        
+        
         SpellFind();
     }
 
@@ -274,15 +278,20 @@ public class PlayerControl : MonoBehaviour
 			// ... set the player's velocity to the maxSpeed in the x axis.
 			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 
-		// If the input is moving the player right and the player is facing left...
-		if(h > 0 && !facingRight)
-			// ... flip the player.
-			Flip();
-		// Otherwise if the input is moving the player left and the player is facing right...
-		else if(h < 0 && facingRight)
-			// ... flip the player.
-			Flip();
+		//flip
+        // If the input is moving the player right and the player is facing left...
 
+        // if you are mid attack don't flip();
+        if (!attacking.attk)
+        {
+            if (h > 0 && !facingRight)
+                // ... flip the player.
+                Flip();
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (h < 0 && facingRight)
+                // ... flip the player.
+                Flip();
+        }
 		
 	}
 	

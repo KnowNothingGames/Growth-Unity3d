@@ -29,6 +29,7 @@ public CircleCollider2D shield_collider;
         
         // debt mp and stop regen
         if (on == true) {
+            MP.Mregen = false;
             MP.spellCost(costDrain);
             MP.Invinc = true;
             wasOn = true;

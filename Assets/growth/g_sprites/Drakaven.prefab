@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.680000007, y: -.400000006, z: 0}
+  m_LocalPosition: {x: 52.4199982, y: -1.91999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404546}
@@ -117,8 +117,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .5956828, y: .826649964}
-  m_Center: {x: .00434112549, y: .00798475742}
+  m_Size: {x: .300000012, y: .813981116}
+  m_Center: {x: .129999995, y: .00800943375}
 --- !u!95 &9504548
 Animator:
   serializedVersion: 3
@@ -148,6 +148,8 @@ MonoBehaviour:
   sword_collider: {fileID: 6148776, guid: 6b9220e9f015c904f9921d6bbcab25f2, type: 2}
   speed: 20
   MP: {fileID: 11404544}
+  attk: 0
+  nxtAttk: .379999995
   playerCtrl: {fileID: 11404548}
 --- !u!114 &11404540
 MonoBehaviour:
@@ -173,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MP: {fileID: 11404544}
   on: 0
-  cost: 25
+  cost: 50
   costDrain: .5
   shield_collider: {fileID: 5818300, guid: 45176cb2b44166f4296c5253b018d8d1, type: 2}
 --- !u!114 &11404544
@@ -189,13 +191,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   Invinc: 0
-  MP: 2000
-  MPMax: 2000
+  MP: 500
+  MPMax: 500
   Mregen: 1
   mRegenRate: .5
   knockForce: 1500
   KnockBackStun: 0
   drak: {fileID: 21204548}
+  mRegenTime: 0
+  mRegenWait: 1
 --- !u!114 &11404548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +227,7 @@ MonoBehaviour:
   currentSpellOne: 
   currentSpellTwo: 
   MP: {fileID: 11404544}
+  weapon: {fileID: 104544}
   wallGrav: 2
   hangTime: .150000006
   jBoost: 1.20000005
@@ -241,6 +246,11 @@ MonoBehaviour:
   playerCtrl: {fileID: 0}
   MP: {fileID: 0}
   cost: 50
+  torque: -1000
+  xForce: 200
+  yForce: 600
+  bonusForce: 0
+  bonusMultiply: 15
 --- !u!212 &21204548
 SpriteRenderer:
   m_ObjectHideFlags: 1

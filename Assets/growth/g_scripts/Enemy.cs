@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public int knockDam = 2;
     public int KnockForce = 200;
 
+    public SpriteRenderer Ene;
 
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
@@ -45,7 +46,10 @@ public class Enemy : MonoBehaviour
 	public void Hurt(int x)
 	{
 		// Reduce the number of hit points by one.
-		HP = HP - x;
+        // should probably do this stuff with an animation controller
+        Ene.color = new Color(1f, 0.5f, 0.5f, 0.65f);
+        
+        HP = HP - x;
 	}
 	
 	void Death()

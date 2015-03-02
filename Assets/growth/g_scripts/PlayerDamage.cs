@@ -14,7 +14,8 @@ public class PlayerDamage : MonoBehaviour {
     public float knockForce;
     public bool KnockBackStun = false;
     public SpriteRenderer drak;
-    
+    public float mRegenTime;
+    public float mRegenWait = 3f;
 
     // Use this for initialization
 	void Start () {
@@ -24,6 +25,12 @@ public class PlayerDamage : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+        if ((Time.time - mRegenTime) > mRegenWait)
+        {
+            Mregen = true;
+
+        }
 
         
         // if you fall below 50 you die
@@ -111,7 +118,10 @@ public class PlayerDamage : MonoBehaviour {
 
         MP -= cost;
         Mregen = false;
-        StartCoroutine(MPregen());
+        // changed to timer instead of co-routine
+        mRegenTime = Time.time;
+        
+        
             
     }
        
@@ -132,16 +142,7 @@ public class PlayerDamage : MonoBehaviour {
 
     }
             
-
-    IEnumerator MPregen()
-    {
-
-        yield return new WaitForSeconds(3.0f);
-        Mregen = true;
-    }
-
-
-
+   
     public void Hurt(int x)
     {
         // Reduce the number of hit points by one.

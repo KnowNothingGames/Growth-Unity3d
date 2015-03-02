@@ -9,24 +9,27 @@ public class PlayerCamera : MonoBehaviour {
     public float xMargin = 1f;		// Distance in the x axis the player can move before the camera follows.
     public float yMargin = 1f;		// Distance in the y axis the player can move before the camera follows.
     public float smooth = 1f;
+    public bool tracking = false;
     private Transform player;
     private Transform inter;
     private Rigidbody2D vel;
+    public float speed = 10f;
 
-
-    void Awake () {
+    void Start () {
 
 
         vel = GameObject.FindGameObjectWithTag("Player").rigidbody2D;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        transform.position = new Vector3(player.position.x, player.position.y, -10);
 	
     }
 
     // Update is called once per frame
 	void Update(){
 
-        track();
+        transform.position = new Vector3(player.position.x, player.position.y, -10);
+      /// using simple trackin right now the lerp is fucked up
+      //  track();
 	}
 
 
@@ -48,35 +51,26 @@ public class PlayerCamera : MonoBehaviour {
     void track()
     {
 
-
-       
-
-        float cameraX = transform.position.x;
-        float cameraY = transform.position.y;
-
-        float playerX = player.position.x;
-        float playerY = player.position.y;
-        float smoother;
+        float speedy = Vector3.Distance(transform.position, player.position);
+        speedy = Mathf.Abs(speedy) * speed;
         
         
         // adjust smoothness according to velocity mag
-        smoother = smooth * vel.velocity.magnitude;
-        
+       
         if (CheckYMargin() || CheckXMargin())
         {
-                  
-            
+        Vector2 tmp = Vector2.MoveTowards(transform.position, player.position, (Time.deltaTime * speedy) /100);
+
+        Debug.Log(tmp.x);
+         transform.position = new Vector3(tmp.x, tmp.y, -10);
+        
            
-           //  smoother 
-           float xNew = Mathf.Lerp(cameraX, playerX,  Time.deltaTime * smoother);
-           float yNew = Mathf.Lerp(cameraY, playerY, Time.deltaTime * smoother);
-            
-           
-           transform.position = new Vector3(xNew, yNew, -10);
 
 
         }
-        
+       
+       
+       
 
     }
 

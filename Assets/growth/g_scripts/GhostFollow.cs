@@ -109,12 +109,12 @@ public class GhostFollow : MonoBehaviour {
 
         xMargin = 1f;
         yMargin = 1f;
-        gameObject.collider2D.enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
         StartCoroutine(backOff());
         bump = true;
 
         if
-        (obj.transform.position.x > rigidbody2D.transform.position.x)
+        (obj.transform.position.x > GetComponent<Rigidbody2D>().transform.position.x)
         {
             xKnock = transform.position.x - knockForce;
         }
@@ -123,7 +123,7 @@ public class GhostFollow : MonoBehaviour {
             xKnock = transform.position.x + knockForce;
         }
         if
-       (obj.transform.position.y > rigidbody2D.transform.position.y)
+       (obj.transform.position.y > GetComponent<Rigidbody2D>().transform.position.y)
         {
             yKnock = -knockForce / 6;
         }
@@ -185,7 +185,7 @@ public class GhostFollow : MonoBehaviour {
         yield return new WaitForSeconds(0.75f);
         xMargin = 0.2f;
         yMargin = 0.2f;
-        gameObject.collider2D.enabled = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
 
     }
 

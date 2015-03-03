@@ -80,7 +80,7 @@ public class Follow: MonoBehaviour {
 
         // using move position to move characters
         Vector2 speed = new Vector2(3, 0);
-        rigidbody2D.MovePosition(rigidbody2D.position + speed * Time.deltaTime);
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + speed * Time.deltaTime);
         // adjust smoothness according to velocity mag
         //smoother = smooth * vel.velocity.magnitude;
 

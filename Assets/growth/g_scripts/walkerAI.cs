@@ -62,7 +62,7 @@ public class walkerAI : MonoBehaviour {
 
 
         Vector2 playerVec = GameObject.FindGameObjectWithTag("Player").transform.position - gameObject.transform.position;
-        rigidbody2D.AddForce(playerVec * moveForce);
+        GetComponent<Rigidbody2D>().AddForce(playerVec * moveForce);
 
 
 

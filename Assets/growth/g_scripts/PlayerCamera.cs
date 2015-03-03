@@ -18,7 +18,7 @@ public class PlayerCamera : MonoBehaviour {
     void Start () {
 
 
-        vel = GameObject.FindGameObjectWithTag("Player").rigidbody2D;
+        vel = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector3(player.position.x, player.position.y, -10);
 	

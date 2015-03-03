@@ -33,7 +33,7 @@ public class _SpellAxe : MonoBehaviour {
 
     void FixedUpdate()
     {     
-    bonusForce = gameObject.rigidbody2D.velocity.x * bonusMultiply; 
+    bonusForce = gameObject.GetComponent<Rigidbody2D>().velocity.x * bonusMultiply; 
     }
 
 
@@ -56,14 +56,14 @@ public class _SpellAxe : MonoBehaviour {
             if (playerCtrl.facingRight)
             {
 
-                weaponInstance.rigidbody2D.AddForce(new Vector2(xForce + bonusForce, yForce));
-                weaponInstance.rigidbody2D.AddTorque(torque);
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
 
             }
             else
             {
-                weaponInstance.rigidbody2D.AddForce(new Vector2(-xForce + bonusForce, yForce));
-                weaponInstance.rigidbody2D.AddTorque(torque);
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
             }
 
 
@@ -94,14 +94,14 @@ public class _SpellAxe : MonoBehaviour {
             if (playerCtrl.facingRight)
             {
 
-                weaponInstance.rigidbody2D.AddForce(new Vector2(xForce + bonusForce, yForce));
-                weaponInstance.rigidbody2D.AddTorque(torque);
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
 
             }
             else
             {
-                weaponInstance.rigidbody2D.AddForce(new Vector2(-xForce + bonusForce, yForce));
-                weaponInstance.rigidbody2D.AddTorque(torque);
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
             }
 
 

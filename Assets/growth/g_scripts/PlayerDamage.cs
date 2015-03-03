@@ -89,7 +89,7 @@ public class PlayerDamage : MonoBehaviour {
                        
 
                 if
-                (col.collider.transform.position.x > rigidbody2D.transform.position.x)
+                (col.collider.transform.position.x > GetComponent<Rigidbody2D>().transform.position.x)
                 {
                     xKnock = -knockForceX;
                 }
@@ -98,7 +98,7 @@ public class PlayerDamage : MonoBehaviour {
                     xKnock = knockForceX;
                 }
                 if
-               (col.collider.transform.position.y > rigidbody2D.transform.position.y)
+               (col.collider.transform.position.y > GetComponent<Rigidbody2D>().transform.position.y)
                 {
                     yKnock = -knockForceY;
                 }
@@ -109,7 +109,7 @@ public class PlayerDamage : MonoBehaviour {
 
 
 
-                rigidbody2D.AddForce(new Vector2(xKnock, yKnock));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(xKnock, yKnock));
                 KnockBackStun = true;
 
                

@@ -185,7 +185,7 @@ public class PlayerControl : MonoBehaviour
 
         if (wallUsed == false)
         {
-            gameObject.rigidbody2D.gravityScale = 3.5f;
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 3.5f;
         }
         
         wallHit = Physics2D.Linecast(transform.position, weaponPoint.position, 1 << LayerMask.NameToLayer("Wall"));
@@ -209,7 +209,7 @@ public class PlayerControl : MonoBehaviour
         
             if (wallUsed && ! grounded)
             {
-                gameObject.rigidbody2D.gravityScale = wallGrav;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = wallGrav;
                         
             }
          
@@ -251,10 +251,10 @@ public class PlayerControl : MonoBehaviour
             // if this is the first frame of the jump times the force by the float
             if (boost == true)
             {
-                rigidbody2D.AddForce(new Vector2(0f, jumpForce * jBoost));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce * jBoost));
                 boost = false;
             }
-            rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
             
         }
 
@@ -269,14 +269,14 @@ public class PlayerControl : MonoBehaviour
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
 		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-        if (h * rigidbody2D.velocity.x < maxSpeed && MP.KnockBackStun == false)
+        if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed && MP.KnockBackStun == false)
 			// ... add a force to the player.
-			rigidbody2D.AddForce(Vector2.right * h * moveForce );
+			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce );
 
 		// If the player's horizontal velocity is greater than the maxSpeed...
-        if (Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed && MP.KnockBackStun == false)
+        if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed && MP.KnockBackStun == false)
 			// ... set the player's velocity to the maxSpeed in the x axis.
-			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
 		//flip
         // If the input is moving the player right and the player is facing left...
@@ -318,14 +318,14 @@ public class PlayerControl : MonoBehaviour
 			yield return new WaitForSeconds(tauntDelay);
 
 			// If there is no clip currently playing.
-			if(!audio.isPlaying)
+			if(!GetComponent<AudioSource>().isPlaying)
 			{
 				// Choose a random, but different taunt.
 				tauntIndex = TauntRandom();
 
 				// Play the new taunt.
-				audio.clip = taunts[tauntIndex];
-				audio.Play();
+				GetComponent<AudioSource>().clip = taunts[tauntIndex];
+				GetComponent<AudioSource>().Play();
 			}
 		}
 	}

@@ -45,11 +45,7 @@ public class GhostFollow : MonoBehaviour {
             speed = angrySpeed;
         }
     }
-
-
-
-
-     
+         
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -66,81 +62,80 @@ public class GhostFollow : MonoBehaviour {
 
         
         distance = Vector3.Distance(transform.position, player.position);
-        if (wandering)
+
+        if (distance <= attackRange && bump == false)
         {
-            wander();
-        } else if 
-         (distance <= attackRange && bump == false)
-        {
-            track();
+            if (wandering)
+            {
+                wander();
+            }
+            else
+            {
+                track();
+            }
         }
-     
 
     }
 
-
+    // for collisions
     void OnCollisionEnter2D(Collision2D col)
     {
 
-        //this needs t obe changed a get a value for hurt instead of being 1
         if (col.collider.tag == "Player" || col.collider.tag == "Obstacle")
         {
-            // go get the damage cause by collision with an emeny this is no controlled on the enemy script
-               
-            
-         //check if you hit the player if you did stop chasing him for backOff time
-         
-         
-             xMargin = 1f;
-             yMargin = 1f;
-             gameObject.collider2D.enabled = false;
-             StartCoroutine(backOff());
-             bump = true;
-     
-     
-            
-            
-            
-            //StartCoroutine(knockBackStun());
-            // add knockback here
-            // if they are farther in the x knockback else knock forward
-            // same for y up and down but currently only one sixth the force
 
+            GameObject obj = col.gameObject;
 
-
-            if
-            (col.collider.transform.position.x > rigidbody2D.transform.position.x)
-            {
-                xKnock = transform.position.x - knockForce;
-            }
-            else
-            {
-                xKnock = transform.position.x + knockForce;
-            }
-            if
-           (col.collider.transform.position.y > rigidbody2D.transform.position.y)
-            {
-                yKnock = -knockForce / 6;
-            }
-            else
-            {
-                yKnock = knockForce / 6;
-            }
-            pos2 = new Vector2(xKnock, yKnock);
-
-
-            
-            //rigidbody2D.AddForce(new Vector2(xKnock, yKnock));
-                    
-            
-
+            knockBack(obj);
         }
     }
 
+    // for triggers
+    void OnTriggerEnter2D(Collider2D col)
+    {
 
+        if (col.tag == "weapon")
+        {
 
+            GameObject obj = col.gameObject;
 
+            knockBack(obj);
+        }
+    }
 
+    // if you get hit by a obstacle or player or weapon get knocked
+    void knockBack(GameObject obj)
+    {
+
+        xMargin = 1f;
+        yMargin = 1f;
+        gameObject.collider2D.enabled = false;
+        StartCoroutine(backOff());
+        bump = true;
+
+        if
+        (obj.transform.position.x > rigidbody2D.transform.position.x)
+        {
+            xKnock = transform.position.x - knockForce;
+        }
+        else
+        {
+            xKnock = transform.position.x + knockForce;
+        }
+        if
+       (obj.transform.position.y > rigidbody2D.transform.position.y)
+        {
+            yKnock = -knockForce / 6;
+        }
+        else
+        {
+            yKnock = knockForce / 6;
+        }
+        pos2 = new Vector2(xKnock, yKnock);
+    }
+
+    
+    
     void wander()
     {
         Vector3 loc = new Vector3(Random.Range(-100, 150), Random.Range(-100, 150), 0); 
@@ -182,26 +177,9 @@ public class GhostFollow : MonoBehaviour {
         return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
     }
     
-     // non trigger method    
-     
-    // trigger method
-   
-    /*
-    void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log("trigger");    
-        if (col.collider2D.tag == "Player")
-        {
-            xMargin = 2f;
-            yMargin = 2f;
-            gameObject.collider2D.enabled = false;
-            StartCoroutine(backOff());
-        }
-    }
-    */
-
     IEnumerator backOff()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         bump = false;
 
         yield return new WaitForSeconds(0.75f);
@@ -213,8 +191,7 @@ public class GhostFollow : MonoBehaviour {
 
     void track()
     {
-       
-                
+                    
         if (CheckYMargin() || CheckXMargin())
         {
 

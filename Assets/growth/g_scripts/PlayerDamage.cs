@@ -9,9 +9,12 @@ public class PlayerDamage : MonoBehaviour {
     public float MPMax;
     public bool Mregen = true;
     public float mRegenRate = 0.2f;
+
     private float xKnock;
     private float yKnock;
-    public float knockForce;
+
+    public float knockForceX;
+    public float knockForceY;
     public bool KnockBackStun = false;
     public SpriteRenderer drak;
     public float mRegenTime;
@@ -65,9 +68,15 @@ public class PlayerDamage : MonoBehaviour {
         //this needs t obe changed a get a value for hurt instead of being 1
         if (col.collider.tag == "Enemy" && Invinc == false)
         {
+            
+            
+            
+            
+            
             // go get the damage cause by collision with an emeny this is no controlled on the enemy script
             Enemy knockD = col.gameObject.GetComponent<Enemy>();
-            knockForce = knockD.KnockForce;
+            knockForceX = knockD.knockForceX;
+            knockForceY = knockD.knockForceY;
             Hurt(knockD.knockDam);
             Invinc = true;
             StartCoroutine(Invincible());
@@ -82,20 +91,20 @@ public class PlayerDamage : MonoBehaviour {
                 if
                 (col.collider.transform.position.x > rigidbody2D.transform.position.x)
                 {
-                    xKnock = -knockForce;
+                    xKnock = -knockForceX;
                 }
                 else
                 {
-                    xKnock = knockForce;
+                    xKnock = knockForceX;
                 }
                 if
                (col.collider.transform.position.y > rigidbody2D.transform.position.y)
                 {
-                    yKnock = -knockForce / 6;
+                    yKnock = -knockForceY;
                 }
                 else
                 {
-                    yKnock = knockForce / 6;
+                    yKnock = knockForceY;
                 }
 
 

@@ -100,6 +100,7 @@
     <Compile Include="Assets\growth\g_scripts\_SpellShield.cs" />
     <Compile Include="Assets\growth\g_scripts\axehit.cs" />
     <Compile Include="Assets\growth\g_scripts\destroy.cs" />
+    <Compile Include="Assets\growth\g_scripts\enemyBrute.cs" />
     <Compile Include="Assets\growth\g_scripts\hit.cs" />
     <Compile Include="Assets\growth\g_scripts\levelEnd.cs" />
     <Compile Include="Assets\growth\g_scripts\walkerAI.cs" />

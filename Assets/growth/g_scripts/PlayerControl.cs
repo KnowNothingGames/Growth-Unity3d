@@ -92,7 +92,7 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 currentSpellTwo = spellfound;
-                Debug.Log(currentSpellTwo);
+                
             
             }
        }

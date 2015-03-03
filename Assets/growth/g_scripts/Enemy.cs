@@ -12,9 +12,11 @@ public class Enemy : MonoBehaviour
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
     public int knockDam = 2;
-    public int KnockForce = 200;
-
-    public SpriteRenderer Ene;
+    public int knockForceX = 200;
+    public int knockForceY = 30;
+    
+    // move sprite renderer out of enemy script
+    //public SpriteRenderer Ene;
 
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
@@ -30,26 +32,26 @@ public class Enemy : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+				
 		
-
-		// If the enemy has one hit point left and has a damagedEnemy sprite...
-	//	if(HP == 1 && damagedEnemy != null)
-			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
-			//ren.sprite = damagedEnemy;
-			
-		// If the enemy has zero or fewer hit points and isn't dead yet...
-		if(HP <= 0 && !dead)
-			// ... call the death function.
-			Death ();
+		
 	}
 	
 	public void Hurt(int x)
 	{
 		// Reduce the number of hit points by one.
         // should probably do this stuff with an animation controller
-        Ene.color = new Color(1f, 0.5f, 0.5f, 0.65f);
+             
+        // turned off color while working on brute this should be on enemy anyway
+       
+        // Ene.color = new Color(1f, 0.5f, 0.5f, 0.65f);
         
         HP = HP - x;
+        if (HP <= 0 && !dead)
+        {
+            Death();
+        }
+
 	}
 	
 	void Death()

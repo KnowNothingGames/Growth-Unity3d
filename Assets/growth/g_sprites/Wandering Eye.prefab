@@ -78,7 +78,8 @@ MonoBehaviour:
   deathSpinMin: -100
   deathSpinMax: 100
   knockDam: 1
-  KnockForce: 600
+  knockForceX: 1500
+  knockForceY: 500
   Ene: {fileID: 21219608}
 --- !u!114 &11481028
 MonoBehaviour:

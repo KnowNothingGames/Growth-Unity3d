@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.4199982, y: -1.91999996, z: 0}
+  m_LocalPosition: {x: 59.4000015, y: -1.89999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404546}
@@ -149,7 +149,7 @@ MonoBehaviour:
   speed: 20
   MP: {fileID: 11404544}
   attk: 0
-  nxtAttk: .379999995
+  nxtAttk: .400000006
   playerCtrl: {fileID: 11404548}
 --- !u!114 &11404540
 MonoBehaviour:
@@ -195,7 +195,8 @@ MonoBehaviour:
   MPMax: 500
   Mregen: 1
   mRegenRate: .5
-  knockForce: 1500
+  knockForceX: 0
+  knockForceY: 0
   KnockBackStun: 0
   drak: {fileID: 21204548}
   mRegenTime: 0
@@ -243,14 +244,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axe: {fileID: 6102868, guid: ecdae23f96f0d794f8a3db565474b1c2, type: 2}
-  playerCtrl: {fileID: 0}
-  MP: {fileID: 0}
+  playerCtrl: {fileID: 11404548}
+  MP: {fileID: 11404544}
   cost: 50
   torque: -1000
   xForce: 200
   yForce: 600
   bonusForce: 0
-  bonusMultiply: 15
+  bonusMultiply: 35
 --- !u!212 &21204548
 SpriteRenderer:
   m_ObjectHideFlags: 1

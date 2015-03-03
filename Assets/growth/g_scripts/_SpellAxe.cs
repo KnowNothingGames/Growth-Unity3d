@@ -13,7 +13,7 @@ public class _SpellAxe : MonoBehaviour {
     public float xForce = 250f;
     public float yForce = 600f;
     public float bonusForce = 0f;
-    public float bonusMultiply = 50f;
+    public float bonusMultiply;
     // Use this for initialization
 
   

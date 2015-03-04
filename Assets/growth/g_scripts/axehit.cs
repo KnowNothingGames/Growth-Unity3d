@@ -27,7 +27,7 @@ public class axehit : MonoBehaviour {
         if (col.tag == "Enemy")
         {
             // ... find the Enemy script and call the Hurt function.
-            col.gameObject.GetComponent<Enemy>().Hurt(1);
+            col.gameObject.GetComponent<Enemy>().Hurt(damage);
 
             // Call the explosion instantiation.
             

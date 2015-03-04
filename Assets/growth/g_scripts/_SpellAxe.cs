@@ -12,8 +12,8 @@ public class _SpellAxe : MonoBehaviour {
     public float torque = -1000f;
     public float xForce = 250f;
     public float yForce = 600f;
-    public float bonusForce = 0f;
-    public float bonusMultiply;
+    private float bonusForce = 0f;
+    public float bonusAmount;
     // Use this for initialization
 
   
@@ -33,7 +33,16 @@ public class _SpellAxe : MonoBehaviour {
 
     void FixedUpdate()
     {     
-    bonusForce = gameObject.GetComponent<Rigidbody2D>().velocity.x * bonusMultiply; 
+    
+       // multiply be velocity was not going well so just added a force bump if at a decent speed
+        if (Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x) > 2f)
+        {
+            bonusForce = bonusAmount;
+        }
+        else {
+            bonusForce = 0;
+        }
+    
     }
 
 
@@ -62,7 +71,7 @@ public class _SpellAxe : MonoBehaviour {
             }
             else
             {
-                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce - bonusForce, yForce));
                 weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
             }
 

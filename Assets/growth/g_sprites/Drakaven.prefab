@@ -250,12 +250,11 @@ MonoBehaviour:
   axe: {fileID: 6102868, guid: ecdae23f96f0d794f8a3db565474b1c2, type: 2}
   playerCtrl: {fileID: 11404548}
   MP: {fileID: 11404544}
-  cost: 50
+  cost: 5
   torque: -1000
-  xForce: 200
-  yForce: 600
-  bonusForce: 0
-  bonusMultiply: 35
+  xForce: 150
+  yForce: 700
+  bonusAmount: 25
 --- !u!212 &21204548
 SpriteRenderer:
   m_ObjectHideFlags: 1

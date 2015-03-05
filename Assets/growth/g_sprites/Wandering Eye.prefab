@@ -81,7 +81,7 @@ MonoBehaviour:
   deathSpinMax: 100
   knockDam: 1
   knockForceX: 1500
-  knockForceY: 500
+  knockForceY: 2000
 --- !u!114 &11481028
 MonoBehaviour:
   m_ObjectHideFlags: 1

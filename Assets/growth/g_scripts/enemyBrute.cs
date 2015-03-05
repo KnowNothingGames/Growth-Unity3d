@@ -7,11 +7,19 @@ public class enemyBrute : Enemy {
     public Transform foot;
     public bool Wall;
     public bool Ground;
-    public int x = 1;
+    
+    public float distance;
+    public float patrolRange;
+    public float attackRange;
+    public bool facingRight = true;
+    private int x = 1;
+    private Transform player;
+    public weaponBrute weaponBrute;
     // Use this for initialization
 	void Start () {
 
-        
+        weaponBrute = GetComponent<weaponBrute>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
 	}
 
@@ -19,22 +27,74 @@ public class enemyBrute : Enemy {
     void FixedUpdate()
     {
         Ground = Physics2D.Linecast(transform.position, foot.position, 1 << LayerMask.NameToLayer("Ground"));
-        Wall = Physics2D.Linecast(transform.position, foot.position, 1 << LayerMask.NameToLayer("Wall")); 
+        Wall = Physics2D.Linecast(transform.position, foot.position, 1 << LayerMask.NameToLayer("Wall"));
+
+    
+    
+    
     }
 	// Update is called once per frame
 	void Update () {
 
-               
-        if (!Ground || Wall ){
+        distance = Vector3.Distance(transform.position, player.position);
+        
+        if (distance >= patrolRange)
+        {
+            patrol();
+        }
+
+        else if (distance < patrolRange && distance > attackRange)
+        {
+            follow();
+        }     
+        
+        
+        else if (distance < attackRange) {
+            weaponBrute.attack();
+        } 
+         
+         
+    }
+    
+    void patrol()
+    {
+        if (!Ground || Wall)
+        {
             Flip();
-            
+
         }
         if (Ground && !Wall)
         {
-            transform.Translate(new Vector3(x,0,0) * Time.deltaTime);
-        }
-	}
+            
 
+                       
+                transform.Translate(new Vector3(x, 0, 0) * (Time.deltaTime * moveSpeed));
+                   
+            
+        
+        }
+    }
+
+    void follow()
+    {
+
+        if ((player.position.x - transform.position.x) < 0 && facingRight)
+        { 
+          Flip();
+        }
+        if ((player.position.x - transform.position.x) >= 0 && !facingRight)
+        {
+            Flip();
+        }
+
+
+        if (Ground && !Wall)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), (Time.deltaTime * moveSpeed));
+        }         
+        
+    }
+           
     void Flip()
     {
         // Switch the way the player is labelled as facing.
@@ -42,8 +102,9 @@ public class enemyBrute : Enemy {
 
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
+        facingRight = !facingRight;
         theScale.x *= -1;
-        x = x * -1;
+        x *= -1;
         transform.localScale = theScale;
     }
 

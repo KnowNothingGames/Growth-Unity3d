@@ -87,6 +87,12 @@ public class GhostFollow : MonoBehaviour {
             GameObject obj = col.gameObject;
 
             knockBack(obj);
+
+            PlayerDamage pDamage = col.gameObject.GetComponent<PlayerDamage>();
+            pDamage.Hurt(1);
+            pDamage.knockBack(gameObject, 200, 200);
+
+
         }
     }
 

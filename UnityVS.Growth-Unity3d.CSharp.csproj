@@ -88,6 +88,7 @@
     <Compile Include="Assets\growth\g_scripts\Follow.cs" />
     <Compile Include="Assets\growth\g_scripts\FollowPlayer.cs" />
     <Compile Include="Assets\growth\g_scripts\GhostFollow.cs" />
+    <Compile Include="Assets\growth\g_scripts\Interfaces.cs" />
     <Compile Include="Assets\growth\g_scripts\PlayerCamera.cs" />
     <Compile Include="Assets\growth\g_scripts\PlayerControl.cs" />
     <Compile Include="Assets\growth\g_scripts\PlayerDamage.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\growth\g_scripts\destroy.cs" />
     <Compile Include="Assets\growth\g_scripts\enemyBrute.cs" />
     <Compile Include="Assets\growth\g_scripts\hit.cs" />
+    <Compile Include="Assets\growth\g_scripts\hit_enemy.cs" />
     <Compile Include="Assets\growth\g_scripts\levelEnd.cs" />
     <Compile Include="Assets\growth\g_scripts\walkerAI.cs" />
     <Compile Include="Assets\growth\g_scripts\weaponBrute.cs" />

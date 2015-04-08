@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerDamage : MonoBehaviour {
+public class PlayerDamage : MonoBehaviour, Iknockable {
 
-    public int HP;
+    public int HP;  
     public bool Invinc;
     public float MP;
     public float MPMax;
     public bool Mregen = true;
     public float mRegenRate = 0.2f;
-
+    
     private float xKnock;
     private float yKnock;
-
+    
     public float knockForceX;
     public float knockForceY;
+    
+     
     public bool KnockBackStun = false;
     public SpriteRenderer drak;
     public float mRegenTime;
@@ -59,66 +61,37 @@ public class PlayerDamage : MonoBehaviour {
         }
 	
 	}
-
-    // if you collider with a 2d collider with tag enemey and you are not invincible call hurt 
-    // set invincle to true and start the timer
-    void OnCollisionEnter2D(Collision2D col)
+    
+    // need to write this to use the knockback interface
+    public void knockBack(GameObject obj, int x, int y)
     {
 
-        //this needs t obe changed a get a value for hurt instead of being 1
-        if (col.collider.tag == "Enemy" && Invinc == false)
+        Invinc = true;
+        StartCoroutine(Invincible());
+        StartCoroutine(knockBackStun());
+
+        if
+               (obj.transform.position.x > GetComponent<Rigidbody2D>().transform.position.x)
         {
-            
-            
-            
-            
-            
-            // go get the damage cause by collision with an emeny this is no controlled on the enemy script
-            Enemy knockD = col.gameObject.GetComponent<Enemy>();
-            knockForceX = knockD.knockForceX;
-            knockForceY = knockD.knockForceY;
-            Hurt(knockD.knockDam);
-            Invinc = true;
-            StartCoroutine(Invincible());
-           
-            StartCoroutine(knockBackStun());
-        // add knockback here
-            // if they are farther in the x knockback else knock forward
-            // same for y up and down but currently only one sixth the force
-            
-                       
-
-                if
-                (col.collider.transform.position.x > GetComponent<Rigidbody2D>().transform.position.x)
-                {
-                    xKnock = -knockForceX;
-                }
-                else
-                {
-                    xKnock = knockForceX;
-                }
-                if
-               (col.collider.transform.position.y > GetComponent<Rigidbody2D>().transform.position.y)
-                {
-                    yKnock = -knockForceY;
-                }
-                else
-                {
-                    yKnock = knockForceY;
-                }
-
-
-
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(xKnock, yKnock));
-                KnockBackStun = true;
-
-               
-                
-                //set the alpha to  the last float
-            drak.color = new Color(1f, 1f, 1f, 0.65f);
-            
+            x = x * -1;
         }
+       
+        if
+       (obj.transform.position.y > GetComponent<Rigidbody2D>().transform.position.y)
+        {
+            y = y * -1;
+        }
+                
+        
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(x, y));
+        KnockBackStun = true;
+
+
+        
+            
     }
+
+
 
     
     // debt MP spell cost stop Mpregen temporarily
@@ -137,6 +110,7 @@ public class PlayerDamage : MonoBehaviour {
 
     IEnumerator Invincible()
     {
+        drak.color = new Color(1f, 1f, 1f, 0.5f);
         yield return new WaitForSeconds(0.75f);
         Invinc = false;
         
@@ -154,8 +128,15 @@ public class PlayerDamage : MonoBehaviour {
    
     public void Hurt(int x)
     {
+
+        
+        Debug.Log(x);
         // Reduce the number of hit points by one.
-        HP = HP - x;
+
+        if (Invinc == false)
+        {
+            HP = HP - x;
+        }
     }
 
     // you die and the level reloads

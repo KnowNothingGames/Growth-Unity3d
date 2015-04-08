@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.1800003, y: -1.89999998, z: 0}
+  m_LocalPosition: {x: -15.8999996, y: .699999988, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404546}
@@ -220,8 +220,8 @@ MonoBehaviour:
   jump: 0
   jumpcount: 0
   jumps: 1
-  moveForce: 365
-  maxSpeed: 4.5
+  moveForce: 350
+  maxSpeed: 8
   jumpClips: []
   jumpForce: 300
   taunts: []
@@ -231,6 +231,7 @@ MonoBehaviour:
   wallUsed: 0
   currentSpellOne: 
   currentSpellTwo: 
+  accel: 200
   MP: {fileID: 11404544}
   weapon: {fileID: 104544}
   wallGrav: 2
@@ -252,9 +253,8 @@ MonoBehaviour:
   MP: {fileID: 11404544}
   cost: 5
   torque: -1000
-  xForce: 150
-  yForce: 700
-  bonusAmount: 0
+  xForce: 250
+  yForce: 400
 --- !u!212 &21204548
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -12,115 +12,44 @@ public class _SpellAxe : MonoBehaviour {
     public float torque = -1000f;
     public float xForce = 250f;
     public float yForce = 600f;
-    private float bonusForce = 0f;
-    public float bonusAmount;
-    // Use this for initialization
-
-  
     
     void Start () {
 
         playerCtrl = gameObject.GetComponent<PlayerControl>();
         MP = gameObject.GetComponent<PlayerDamage>();
-        
-
-	}
-	
+   	}
 	// Update is called once per frame
-	void Update () {
-         
-	}
-
-    void FixedUpdate()
-    {     
-    
-       // multiply be velocity was not going well so just added a force bump if at a decent speed
-        if (Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x) > 2f)
-        {
-            bonusForce = bonusAmount;
-        }
-        else {
-            bonusForce = 0;
-        }
-    
+	void FixedUpdate()
+    {
+                   
     }
-
-
-
+    // requied for spells
     public void cancel() { }
-
+    // required for spells
     public void castMe()
     {
-
-
-
         if ((Time.time - lastattack) > 0.2 && MP.MP >= cost)
         {
             MP.spellCost(cost);
-
             BoxCollider2D weaponInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
-            
-
-
+         
             if (playerCtrl.facingRight)
             {
-
-                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce + bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().velocity = new Vector2 (GetComponent<Rigidbody2D>().velocity.x /3, (GetComponent<Rigidbody2D>().velocity.y /30));
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce, yForce));
                 weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
 
             }
             else
             {
-                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce - bonusForce, yForce));
+                weaponInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x /3 , (GetComponent<Rigidbody2D>().velocity.y / 30));
+                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce, yForce));
                 weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
             }
 
-
             lastattack = Time.time;
-
         }  
-                  
+                 
     }
-
-
-    public void castAxe()
-    {
-
-
-
-        if ((Time.time - lastattack) > 0.2 && MP.MP >= 50f)
-        {
-           
-            
-            MP.spellCost(50f);
-            
-
-
-            BoxCollider2D weaponInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
-            
-
-
-            if (playerCtrl.facingRight)
-            {
-
-                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce + bonusForce, yForce));
-                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
-
-            }
-            else
-            {
-                weaponInstance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-xForce + bonusForce, yForce));
-                weaponInstance.GetComponent<Rigidbody2D>().AddTorque(torque);
-            }
-
-
-            lastattack = Time.time;
-
-        }
-
-    }
-
-
-
 
 }

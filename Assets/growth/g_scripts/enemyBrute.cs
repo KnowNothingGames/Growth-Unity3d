@@ -13,6 +13,13 @@ public class enemyBrute : Enemy {
     public float attackRange;
     public bool facingRight = true;
     private int x = 1;
+    
+    
+    public int knockDam = 2;
+    public int knockForceX = 200;
+    public int knockForceY = 30;
+    
+    
     private Transform player;
     public weaponBrute weaponBrute;
     // Use this for initialization
@@ -28,12 +35,10 @@ public class enemyBrute : Enemy {
     {
         Ground = Physics2D.Linecast(transform.position, foot.position, 1 << LayerMask.NameToLayer("Ground"));
         Wall = Physics2D.Linecast(transform.position, foot.position, 1 << LayerMask.NameToLayer("Wall"));
-
-    
-    
-    
+  
     }
-	// Update is called once per frame
+    
+    // Update is called once per frame
 	void Update () {
 
         distance = Vector3.Distance(transform.position, player.position);
@@ -55,6 +60,22 @@ public class enemyBrute : Enemy {
          
          
     }
+
+    // knockback should be added to derived class because of different trigger conditions
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        // If it hits an enemy...
+        if (col.gameObject.tag == "Player")
+        {
+            // ... find the Enemy script and call the Hurt function.
+            PlayerDamage pDamage = col.gameObject.GetComponent<PlayerDamage>();
+           
+                pDamage.Hurt(knockDam);
+                pDamage.knockBack(gameObject, knockForceX, knockForceY);
+            
+        }
+    }
+    
     
     void patrol()
     {
@@ -65,11 +86,10 @@ public class enemyBrute : Enemy {
         }
         if (Ground && !Wall)
         {
-            
-
-                       
-                transform.Translate(new Vector3(x, 0, 0) * (Time.deltaTime * moveSpeed));
+          
                    
+                transform.Translate(new Vector3(x, 0, 0) * (Time.deltaTime * moveSpeed));
+        
             
         
         }

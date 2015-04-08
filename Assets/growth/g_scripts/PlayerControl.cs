@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     public int jumps = 2;                   // jumps allowed before grounded again 2 = double jump 3 = triple etc
 	
     public float moveForce = 365f;			// Amount of force added to move the player left and right.
-	public float maxSpeed = 5f;				// The fastest the player can travel in the x axis.
+	public float maxSpeed =5f;				// The fastest the player can travel in the x axis.
 	public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
 	public float jumpForce = 1000f;			// Amount of force added when the player jumps.
 	public AudioClip[] taunts;				// Array of clips for when the player taunts.
@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
     
     public string currentSpellOne;
     public string currentSpellTwo;
-        
+    public float accel = 0.1f;   
     
     public PlayerDamage MP;
     public GameObject weapon;
@@ -50,6 +50,7 @@ public class PlayerControl : MonoBehaviour
     public float jBoost;
     private bool boost;
 
+            
     void Awake()
 	{
 		// Setting up references.
@@ -102,21 +103,14 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-
-
-    
-
     //** look into line cast
 	void Update()
 	{
-
-
-
         // If the jump button is pressed and the player is grounded then the player should jump. Or is they havent used all their jmups
         // as it stands right now you can double jump up a wall. then do wall jumping - not sure if I like this. 
         if (Input.GetButtonDown("Jump") && grounded && MP.KnockBackStun == false || Input.GetButtonDown("Jump") && jumpcount < jumps && MP.MP >= 50f && MP.KnockBackStun == false)
         {
-            
+        
             //grounded will reset this to quickly for it to register the first jump so it will only count after the first jump
             jumpcount += 1;
            
@@ -158,18 +152,20 @@ public class PlayerControl : MonoBehaviour
            gameObject.GetComponent<SpellCast>().castspell(currentSpellTwo + "_cancel" );
         }
 
-       
-
-       
+               
 
 
 	    }
 
       
+
+
       
     void FixedUpdate ()
 	{
-
+        
+        
+        
         anim.SetBool("grounded", grounded);
         anim.SetBool("wallUsed", wallUsed);
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
@@ -261,22 +257,24 @@ public class PlayerControl : MonoBehaviour
 
         // horizontal movement
 
-
+        // need to work out a method for this instead of just addind force need to add speed. to return a smooth movement
         // Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		anim.SetFloat("Speed", Mathf.Abs(h));
 
-		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed && MP.KnockBackStun == false)
-			// ... add a force to the player.
-			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce );
+        {
+            // instead of adding force try incrementing velocity
 
-		// If the player's horizontal velocity is greater than the maxSpeed...
-        if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed && MP.KnockBackStun == false)
-			// ... set the player's velocity to the maxSpeed in the x axis.
-			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(maxSpeed * h  , GetComponent<Rigidbody2D>().velocity.y);
+                    
+        }
+
+       
+              
+
 
 		//flip
         // If the input is moving the player right and the player is facing left...

@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.4099998, y: -1.69000006, z: 0}
+  m_LocalPosition: {x: -12.0653458, y: .127428055, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427378}
@@ -136,7 +136,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
+  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -186,9 +186,6 @@ MonoBehaviour:
   hundredPointsUI: {fileID: 0}
   deathSpinMin: -100
   deathSpinMax: 100
-  knockDam: 2
-  knockForceX: 1500
-  knockForceY: 400
   foot: {fileID: 427378}
   Wall: 0
   Ground: 1
@@ -196,7 +193,9 @@ MonoBehaviour:
   patrolRange: 6
   attackRange: 2
   facingRight: 1
-  x: 1
+  knockDam: 1
+  knockForceX: 1500
+  knockForceY: 400
   weaponBrute: {fileID: 0}
 --- !u!114 &11446688
 MonoBehaviour:
@@ -209,11 +208,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c0f01b0894db3479b2897956fa32e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword_collider: {fileID: 6148776, guid: 6b9220e9f015c904f9921d6bbcab25f2, type: 2}
+  knockBackX: 100
+  knockBackY: 100
+  KnockBackDamage: 0
+  weapon_collider_pivot: {fileID: 105668, guid: 01b5e9c2ff45368449dd98fbb19af596,
+    type: 2}
   speed: 20
   attk: 1
   nxtAttk: 3
-  weaponOffset: 1.20000005
+  weaponOffset: .5
   enemyBrute: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

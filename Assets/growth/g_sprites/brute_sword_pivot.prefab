@@ -85,7 +85,7 @@ MonoBehaviour:
   damage: 1
   knockBackX: 100
   knockBackY: 100
-  upframes: 2
+  upframes: 5
 --- !u!212 &21235502
 SpriteRenderer:
   m_ObjectHideFlags: 1

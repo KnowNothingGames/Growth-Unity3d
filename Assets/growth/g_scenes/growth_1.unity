@@ -786,7 +786,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 404548, guid: 6830bf73b5b0cfa4a9f29533c3cf136e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -15.8999996
+      value: -9.94999981
       objectReference: {fileID: 0}
     - target: {fileID: 404548, guid: 6830bf73b5b0cfa4a9f29533c3cf136e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -814,7 +814,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 404548, guid: 6830bf73b5b0cfa4a9f29533c3cf136e, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 11404544, guid: 6830bf73b5b0cfa4a9f29533c3cf136e, type: 2}
       propertyPath: knockForceX

@@ -12,12 +12,14 @@ public class weaponBrute : MonoBehaviour {
     public int KnockBackDamage = 0;
 
     public GameObject weapon_collider_pivot;
+    public GameObject weaponInstance;
     public float speed = 20f;
     private float lastattack = 0;
     
     public bool attk = true;
     public float nxtAttk = 0.3f;
     public float weaponOffset;
+    public bool swinging = false;
    
     public enemyBrute enemyBrute;
 
@@ -30,9 +32,20 @@ public class weaponBrute : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       
+       if (swinging == true){
+           Quaternion target = Quaternion.Euler(0, 0, -90); 
+           weaponInstance.transform.rotation = Quaternion.Lerp(transform.rotation, target, Time.deltaTime * 1000f);
+       }
     }
 
+
+        IEnumerator swing(){
+            // we should have this functions destory the weapon
+            yield return new WaitForSeconds(0.5f);
+            swinging = true;
+            yield return new WaitForSeconds(5f);
+            swinging = false;
+        }
 
     public void attack()
     {
@@ -43,17 +56,20 @@ public class weaponBrute : MonoBehaviour {
             if (enemyBrute.facingRight)
             {
 
-                // not sure if I want to do raycast of collider here
-                //BoxCollider2D weaponInstance = Instantiate(weapon_collider, new Vector2(transform.position.x + weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as BoxCollider2D;
-                GameObject weaponInstance = Instantiate(weapon_collider_pivot, new Vector2(transform.position.x + weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+               
+               weaponInstance = Instantiate(weapon_collider_pivot, new Vector2(transform.position.x + weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
                 weaponInstance.transform.parent = transform;
+                StartCoroutine(swing());
+         
+            
+              
                
             }
             else
             {
-
-                GameObject weaponInstance = Instantiate(weapon_collider_pivot, new Vector2(transform.position.x - weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+                 weaponInstance = Instantiate(weapon_collider_pivot, new Vector2(transform.position.x - weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
                 weaponInstance.transform.parent = transform;
+                StartCoroutine(swing());
             }
 
             lastattack = Time.time;

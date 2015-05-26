@@ -24,7 +24,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 489210}
   - 61: {fileID: 6175236}
-  - 114: {fileID: 11425508}
   - 212: {fileID: 21235502}
   m_Layer: 0
   m_Name: brute_sword
@@ -40,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.9799995, y: .310000002, z: 0}
+  m_LocalPosition: {x: 9.28940392, y: .388846904, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489210}
@@ -71,21 +70,6 @@ BoxCollider2D:
   m_Offset: {x: .00246270979, y: -.00329113007}
   serializedVersion: 2
   m_Size: {x: .133654922, y: .177297592}
---- !u!114 &11425508
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea20d1bf8fa3d06428bc4aaead5dcaf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  knockBackX: 100
-  knockBackY: 100
-  upframes: 5
 --- !u!212 &21235502
 SpriteRenderer:
   m_ObjectHideFlags: 1

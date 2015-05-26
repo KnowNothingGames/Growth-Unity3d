@@ -130,7 +130,7 @@ public class PlayerDamage : MonoBehaviour, Iknockable {
     {
 
         
-        Debug.Log(x);
+      
         // Reduce the number of hit points by one.
 
         if (Invinc == false)

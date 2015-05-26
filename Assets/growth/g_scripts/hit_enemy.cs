@@ -4,10 +4,10 @@ using System.Collections;
 public class hit_enemy : MonoBehaviour {
 
 
-    public int damage = 1;
-    public int knockBackX = 100;
-    public int knockBackY = 100;
-    public float upframes;
+        public int damage = 1;
+        public int knockBackX = 100;
+        public int knockBackY = 100;
+        public float upframes;
 
     // Use this for initialization
     void Start()

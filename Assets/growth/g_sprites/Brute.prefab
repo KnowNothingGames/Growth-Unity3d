@@ -211,18 +211,18 @@ MonoBehaviour:
   KnockBackDamage: 0
   weaponInstance: {fileID: 105668, guid: 01b5e9c2ff45368449dd98fbb19af596, type: 2}
   attk: 1
-  nxtAttk: 5
+  nxtAttk: 3
   weaponOffset: .5
   swinging: 0
-  aliveExtra: .200000003
+  aliveExtra: .100000001
   swingDelay: .5
-  swingTime: 1
+  swingTime: .100000001
   enemyBrute: {fileID: 0}
   damage: 1
   knockBackX: 100
   knockBackY: 100
-  rotation: -90
-  swingFrames: 20
+  rotation: -100
+  swingFrames: 8
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

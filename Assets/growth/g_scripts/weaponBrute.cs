@@ -13,6 +13,7 @@ public class weaponBrute : MonoBehaviour {
 
     
     public GameObject weaponInstance;
+    private GameObject weaponInstanceClone;
     // here
    
 
@@ -35,53 +36,37 @@ public class weaponBrute : MonoBehaviour {
 
     public float rotation;
     public float swingFrames;
+    private float iteration;
+
 
 
     // Use this for initialization
     void Start()
     {
         enemyBrute = GetComponent<enemyBrute>();
- 
-    
-    }
-      
-    
-    // Update is called once per frame
-   void Update()
-    {
        
-     }
- 
-     void FixedUpdate () {
-
-         if (swinging == true)
-         {
-             if (weaponInstance.transform.rotation.eulerAngles.z > rotation)
-             {
-                 weaponInstance.transform.Rotate(new Vector3(0, 0, (rotation) / (swingFrames / 5) * Time.deltaTime * 10));
-             }
-             if (weaponInstance.transform.rotation.eulerAngles.z < rotation)
-             {
-                 weaponInstance.transform.eulerAngles = new Vector3(0, 0, rotation);
-             }
-
-         }
     }
+        
+    // Update is called once per frame
+        void Update () {
 
-       IEnumerator swing()
-    {
-
-        Debug.Log("here");
+             if (iteration > 0)
+             {
+                 iteration = iteration - 1;
+                 weaponInstanceClone.transform.Rotate(new Vector3(0, 0, rotation / swingFrames));
+             }
+             
+             //    weaponInstance.transform.eulerAngles = new Vector3(0, 0, rotation);
+         
+    }
+           IEnumerator swing()
+    {        
         // we should have this functions destory the weapon
         yield return new WaitForSeconds(swingDelay);
-        swinging = true;
-        yield return new WaitForSeconds(1);
-        swinging = false;
-    }     
- 
-      
+        iteration = swingFrames;
 
-        void OnTriggerEnter2D(Collider2D col)
+    }     
+           void OnTriggerEnter2D(Collider2D col)
         {
             // If it hits an enemy...
             if (col.tag == "Player")
@@ -104,18 +89,18 @@ public class weaponBrute : MonoBehaviour {
             if (enemyBrute.facingRight)
             {
               
-               weaponInstance = Instantiate(weaponInstance, new Vector2(transform.position.x + weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+              weaponInstanceClone = Instantiate(weaponInstance, new Vector2(transform.position.x + weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
        
             }
             else
             {
-                 weaponInstance = Instantiate(weaponInstance, new Vector2(transform.position.x - weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+              weaponInstanceClone = Instantiate(weaponInstance, new Vector2(transform.position.x - weaponOffset, transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
                
             }
-            weaponInstance.transform.parent = transform;
+            weaponInstanceClone.transform.parent = transform;
            
             // destory weapon after sum of all 3 times passed to avoid errors
-            Destroy(weaponInstance, (aliveExtra + swingDelay + swingTime + 1f));
+            Destroy(weaponInstanceClone, (aliveExtra + swingDelay + swingTime));
             StartCoroutine(swing());
             lastattack = Time.time;
 

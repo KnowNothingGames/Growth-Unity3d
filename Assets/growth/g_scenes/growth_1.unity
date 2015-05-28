@@ -613,15 +613,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 476302, guid: b35ca4c6e4fb3d14cadc9e29fac194a6, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 11446688, guid: b35ca4c6e4fb3d14cadc9e29fac194a6, type: 2}
-      propertyPath: rotation
-      value: 90
+      propertyPath: aliveExtra
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 11446688, guid: b35ca4c6e4fb3d14cadc9e29fac194a6, type: 2}
-      propertyPath: swingFrames
-      value: 5
+      propertyPath: nxtAttk
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b35ca4c6e4fb3d14cadc9e29fac194a6, type: 2}
